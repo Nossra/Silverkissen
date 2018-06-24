@@ -1,0 +1,52 @@
+<section>
+  <div class="row">
+    <div class="col-md-12">
+      <h1>{{parent?.name}}</h1>
+    </div>
+  </div>
+</section>
+
+<section id="parentForm">
+  <div class="row">
+    <div class="col-md-12">
+      <form [formGroup]="parentForm" (ngSubmit)="update(parentForm.value)">
+        <section id="general" class="sections">
+          <div class="row">
+            <div class="col-md-12">
+              <label>Namn</label>
+              <input type="input" class="form-control" placeholder="{{parent?.name}}">
+              <label>Ras</label>
+              <input type="input" class="form-control" placeholder="{{parent?.breed}}">
+              <label>Färg</label>
+              <input type="input" class="form-control" placeholder="{{parent?.color}}">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Född</label>
+              <input type="date" class="form-control" placeholder="{{parent?.born}}">
+            </div>
+            <div class="col-md-6">
+              <label>Ålder</label>
+              <input type="number" class="form-control" placeholder="{{parent?.age}}">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              Vaccinerad <input type="checkbox" value="{{parent?.vaccinated}}">
+            </div>
+            <div class="col-md-4">
+              SVERAK <input type="checkbox" value="{{parent?.peedigree}}">
+            </div>
+            <div class="col-md-4">
+              Chippad <input type="checkbox" value="{{parent?.chipped}}">
+            </div>
+            <div class="col-md-4">
+              Förälder <input type="checkbox" value="{{parent?.parent}}">
+            </div>
+          </div>
+        </section>
+      </form>
+    </div>
+  </div>
+</section>

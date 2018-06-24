@@ -1,0 +1,20 @@
+.jumbotron {
+    color:white;
+    width:100%;
+    text-align:center;
+    margin-bottom: 15px;
+    margin-top:88px;
+}
+
+.jumbotron-wrapper {
+    background-image:url("/assets/images/background-cat.jpg");
+}
+
+.innerCol {
+    float:left;
+    margin-right:10px;
+}
+
+.custom-card-margin {
+    margin-top: -15px;
+}

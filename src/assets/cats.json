@@ -1,0 +1,18 @@
+[{   
+    "id":"4",
+    "sex":"Male",
+    "name":"Tiger",
+    "color":"Creme Color-Point",
+    "SVERAK" : true,
+    "vaccinated" : true,
+    "pedigree" : true
+},
+{
+    "id":"5",
+    "sex":"Female",
+    "name":"Mirabelle",
+    "color":"Purple Color-Point",
+    "SVERAK" : true,
+    "vaccinated" : true,
+    "pedigree" : true
+}]

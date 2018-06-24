@@ -1,0 +1,15 @@
+.modalPosition {
+    position:fixed; top:15%;
+}
+
+.table-head {
+    background-color:#0079a1; color:white;
+}
+
+.sections {
+    background-color: white; padding:10px;
+}
+
+.center-label {
+    padding-top:10px;
+}

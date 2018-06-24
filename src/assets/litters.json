@@ -1,0 +1,109 @@
+[{
+    "id":"1",
+    "numberOfKiteens":"3",
+    "numberOfMales":"2",
+    "numberOfFemales":"1",
+    "born" : "2018-05-28",
+    "kittens" : [
+        {   
+            "id":"1",
+            "sex":"Male",
+            "name":"Stefan",
+            "color":"Creme Color-Point"
+        },
+        {
+            "id":"2",
+            "sex":"Male",
+            "name":"Vilde",
+            "color":"Brown Tabby"
+        },
+        {
+            "id":"3",
+            "sex":"Female",
+            "name":"Ipenda",
+            "color":"Purple Color-Point"
+        }
+    ],
+    "parents" : [
+        {   
+            "id":"4",
+            "sex":"Male",
+            "name":"Tiger",
+            "color":"Creme Color-Point",
+            "SVERAK" : true,
+            "vaccinated" : true,
+            "pedigree" : true
+        },
+        {
+            "id":"5",
+            "sex":"Female",
+            "name":"Mirabelle",
+            "color":"Purple Color-Point",
+            "SVERAK" : true,
+            "vaccinated" : true,
+            "pedigree" : true
+        }
+    ],
+    "notes" : "Andra kullen från Tiger och Mirabelle! De kom fort efter den första! Som vanligt så är alla vaccinerade, chippade och har stamtavla hos SVERAK",
+    "SVERAK" : true,
+    "vaccinated" : true,
+    "chipped" : true,
+    "readyAtDate":"2018-07-30",
+    "breed" : "Ragdoll",
+    "cardImageUrl" : "assets/images/stef.jpg"
+},
+{
+    "id":"2",
+    "numberOfKiteens":"3",
+    "numberOfMales":"3",
+    "numberOfFemales":"0",
+    "born" : "2018-07-28",
+    "kittens" : [
+        {   
+            "id":"10",
+            "sex":"Male",
+            "name":"Weasley",
+            "color":"Purple Color-Point"
+        },
+        {
+            "id":"11",
+            "sex":"Male",
+            "name":"Ivan",
+            "color":"Black Tabby"
+        },
+        {
+            "id":"12",
+            "sex":"Male",
+            "name":"Otto",
+            "color":"Red Tabby"
+        }
+    ],
+    "parents" : [
+        {   
+            "id":"4",
+            "sex":"Male",
+            "name":"Tiger",
+            "color":"Creme Color-Point",
+            "SVERAK" : true,
+            "vaccinated" : true,
+            "pedigree" : true
+        },
+        {
+            "id":"5",
+            "sex":"Female",
+            "name":"Mirabelle",
+            "color":"Purple Color-Point",
+            "SVERAK" : true,
+            "vaccinated" : true,
+            "pedigree" : true
+        }
+    ],
+    "notes" : "Första kullen från Tiger och Mirabelle. Alla är vaccinerade och har stamtavla hos SVERAK. Chippningen kommer snart!",
+    "SVERAK" : true,
+    "vaccinated" : true,
+    "chipped" : false,
+    "readyAtDate":"2018-010-30",
+    "breed" : "Ragdoll/Sibirisk Skogskatt",
+    "cardImageUrl" : "assets/images/stef2.jpg"
+}
+]

@@ -1,0 +1,53 @@
+<section>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Kattungar</h3>
+  </div>
+</div>
+</section>
+<section *ngFor="let litter of litters" style="background-color:white; padding:10px; margin:10px;">
+  <div class="row">
+    <div class="col-md-8">
+      {{litter.notes}}
+    </div>
+    <div class="col-md-3 offset-1">
+      <img src="{{litter.displayPicture}}" alt="Kattungar" style="width:100%; height:auto;" class="img-responsive"> <!-- {{litter.cardImageUrl}} -->
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-md-12">
+        <hr>
+        <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#litter' + litter.id">Ta bort</button>
+        <a class="btn btn-primary" [routerLink]="['/admin', {outlets: {adminOutlet:['litters', litter.id]}}]">Editera</a>
+      </div>
+    </div>
+</section>
+<section>
+  <div class="row" style="margin: 10px;">
+    <div class="col-md-12">
+      <a [routerLink]="['/admin',{outlets:{adminOutlet:'createlitter'}}]" class="btn btn-primary">Lägg till kull</a>
+    </div>
+  </div>
+</section>
+
+                             <!-- KITTENS MODAL -->
+                             <div *ngFor="let litter of litters">
+                              <div class="modal fade modalPosition" id="litter{{litter.id}}" role="dialog">
+                                <div class="modal-dialog">
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h4>Bekräfta borttagning av kull</h4>
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <i>{{litter.notes}}</i>
+                                      <hr>
+                                      <p>Denna kull kommer att tas  bort. Detta kan inte ångras.<br><br>Om du inte vill visa upp kullen kan du välja att arkivera den under 'Editera'</p>
+                                      <button type="button" class="btn btn-success" data-dismiss="modal">Behåll kull</button>
+                                      <button type="button" class="btn btn-danger" (click)="delete(litter)">Ta bort kull</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                             </div>

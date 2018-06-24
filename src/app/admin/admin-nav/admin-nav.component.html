@@ -1,0 +1,12 @@
+<div class="admin-nav">
+  <p class="navbar-brand admin-panel">ADMIN</p>
+  <hr>
+  <ul class="nav flex-column ">
+    <li class="nav-item">
+      <a [routerLink]="['/admin',{outlets:{adminOutlet:'litters'}}]" class="nav-link">Kullar</a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/admin',{outlets:{adminOutlet:'parents'}}]" class="nav-link">Katter</a>
+    </li>
+  </ul>
+</div>

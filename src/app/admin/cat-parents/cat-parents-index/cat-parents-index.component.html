@@ -1,0 +1,31 @@
+<section>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Föräldrar</h3>
+    </div>
+  </div>
+  </section>
+  <section *ngFor="let parent of parents" style="background-color:white; padding:10px; margin:10px;">
+    <div class="row">
+      <div class="col-md-8">
+        {{parent.name}}
+      </div>
+      <div class="col-md-3 offset-1">
+        <img src="{{parent.displayPicture}}" alt="katt" style="width:100%; height:auto;" class="img-responsive"> <!-- {{litter.cardImageUrl}} -->
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <hr>
+         <!--  <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#parent' + parent.id">Ta bort</button> -->
+          <a class="btn btn-primary" [routerLink]="['/admin', {outlets: {adminOutlet:['parents', parent.id]}}]">Editera</a>
+        </div>
+      </div>
+  </section>
+  <section>
+    <div class="row" style="margin: 10px;">
+      <div class="col-md-12">
+        <a [routerLink]="['/admin',{outlets:{adminOutlet:'createparent'}}]" class="btn btn-primary">Lägg till förälder</a>
+      </div>
+    </div>
+  </section>

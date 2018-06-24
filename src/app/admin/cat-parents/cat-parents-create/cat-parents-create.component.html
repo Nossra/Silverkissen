@@ -1,0 +1,95 @@
+<section>
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Lägg till förälder</h1>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <form [formGroup]="createForm" (ngSubmit)="create(createForm.value)">
+      <section class="sections">
+
+        <div class="row">
+          <div class="col-md-6">
+            <label>Namn</label>
+            <input type="input" class="form-control" formControlName="name">
+          </div>
+          <div class="col-md-6">
+            <label>Kön</label>
+            <select class="form-control" formControlName="sex">
+              <option value="Hane">Hane</option>
+              <option value="Hona">Hona</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <label>Anteckningar</label>
+            <textarea formControlName="notes" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-12">
+                <label>Bilder</label><br>
+                <div *ngFor="let image of images">
+                  <img src="{{image.url}}" alt="{{image}}"class="img-responsive" style=" width:30%; height:auto;float:left; margin:5px;">
+                </div>
+                <button type="file" class="btn btn-primary">Lägg till</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <label>Född</label>
+            <input type="date" formControlName="born" class="form-control">
+            <span style="color:red;"
+              *ngIf="createForm.controls['born'].touched && createForm.controls['born'].invalid">
+                Datum krävs..
+            </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <label>Ras</label>
+            <input type="input" formControlName="breed" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label>Färg</label>
+            <input type="input" formControlName="color" class="form-control">
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:20px;">
+          <div class="col-sm-4">
+            Vaccinerad <input type="checkbox" formControlName="vaccinated">
+          </div>
+          <div class="col-sm-4">
+            Sverak <input type="checkbox" formControlName="pedigree">
+          </div>
+          <div class="col-sm-4">
+            Chippad <input type="checkbox" formControlName="chipped">
+          </div>
+        </div>
+      </section>
+
+
+      <section id="management" class="sections">
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-success" [disabled]="createForm.invalid">Spara kull</button>
+            <button type="button" class="btn btn-primary">Tillbaka</button>
+          </div>
+        </div>
+      </section>
+    </form>
+  </div>
+</section>
