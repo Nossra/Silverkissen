@@ -11,38 +11,43 @@
     <div class="col-md-12">
       <form [formGroup]="parentForm" (ngSubmit)="update(parentForm.value)">
         <section id="general" class="sections">
+
           <div class="row">
             <div class="col-md-12">
               <label>Namn</label>
-              <input type="input" class="form-control" placeholder="{{parent?.name}}">
+              <input type="input" class="form-control" placeholder="{{parent?.name}}" formControlName="name">
+              <label>Noteringar</label>
+              <textarea class="form-control" placeholder="{{parent?.notes}}" formControlName="notes"></textarea>
+              <label>Kön</label>
+              <select type="input" class="form-control" value="{{parent?.sex}}" formControlName="sex">
+                <option value="Hane">Hane</option>
+                <option value="Hona">Hona</option>
+              </select>
               <label>Ras</label>
-              <input type="input" class="form-control" placeholder="{{parent?.breed}}">
+              <input type="input" class="form-control" placeholder="{{parent?.breed}}" formControlName="breed">
               <label>Färg</label>
-              <input type="input" class="form-control" placeholder="{{parent?.color}}">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
+              <input type="input" class="form-control" placeholder="{{parent?.color}}" formControlName="color">
               <label>Född</label>
-              <input type="date" class="form-control" placeholder="{{parent?.born}}">
-            </div>
-            <div class="col-md-6">
-              <label>Ålder</label>
-              <input type="number" class="form-control" placeholder="{{parent?.age}}">
+              <input type="date" class="form-control" placeholder="{{parent?.born}}" formControlName="born">
             </div>
           </div>
+
           <div class="row">
             <div class="col-md-4">
-              Vaccinerad <input type="checkbox" value="{{parent?.vaccinated}}">
+              Vaccinerad <input type="checkbox" value="{{parent?.vaccinated}}" formControlName="vaccinated">
             </div>
             <div class="col-md-4">
-              SVERAK <input type="checkbox" value="{{parent?.peedigree}}">
+              SVERAK <input type="checkbox" value="{{parent?.peedigree}}" formControlName="pedigree">
             </div>
             <div class="col-md-4">
-              Chippad <input type="checkbox" value="{{parent?.chipped}}">
+              Chippad <input type="checkbox" value="{{parent?.chipped}}" formControlName="chipped">
             </div>
-            <div class="col-md-4">
-              Förälder <input type="checkbox" value="{{parent?.parent}}">
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary">Spara</button>
+              <button type="button" class="btn btn-secondary">Avbryt</button>
             </div>
           </div>
         </section>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Cat } from '../../../entities/cat';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CatService } from '../../../services/CatService';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
@@ -11,15 +11,18 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class CatParentsEditComponent implements OnInit {
   
-  parent : Cat;
+  parent: Cat;
   private parentId: number;
   parentForm: FormGroup;
+  vaccinated:boolean;
+  pedigree:boolean;
+  chipped:boolean;
   constructor(
     private activatedRoute:ActivatedRoute,
     private catService: CatService,
-    private formBuilder: FormBuilder) { 
+    private formBuilder: FormBuilder,
+    private router:Router) { 
       this.parentForm = this.formBuilder.group({
-        'age' : null,
         'chipped' : null,
         'name' : null,
         'parent' : null,
@@ -28,9 +31,18 @@ export class CatParentsEditComponent implements OnInit {
         'notes' : null,
         'breed': null,
         'color' : null,
-        'sex' : null
+        'sex' : null,
+        'born' : null
       });
     }
+
+  update(values: Cat) {
+    console.log(values);
+    this.catService.update(values, this.parent.id).subscribe(x => {
+     // this.router.navigate([{outlets : {'adminOutlet' : 'parents'}}])
+     
+    });
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(x => {
@@ -38,7 +50,9 @@ export class CatParentsEditComponent implements OnInit {
     });
     this.catService.findById(this.parentId).subscribe(x => {
       this.parent = x;
-      console.log(this.parent)
+      this.parent.pedigree = x["pedigree"]
+      this.parent.vaccinated = x["vaccinated"];
+      this.parent.chipped = x["chipped"];
     });
   }
 

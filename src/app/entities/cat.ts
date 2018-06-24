@@ -11,6 +11,7 @@ export class Cat {
     public chipped:boolean;
     public notes:string;
     public parent:boolean;
+    public born:Date;
     constructor() {
 
     }
