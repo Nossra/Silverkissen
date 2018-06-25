@@ -17,26 +17,12 @@
             <!--   <span *ngIf="!litterForm.valid && litterForm.get('notes').touched" style="color:red;">Du måste ha med anteckningar.</span> -->
               <div class="row">
                 <div class="col-md-12">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <label>Bilder</label><br>
-                      <div *ngFor="let image of litter?.imageUrls">
-                        <img src="{{image.url}}" alt="{{image}}"class="img-responsive" style=" width:30%; height:auto;float:left; margin:5px;">
-                      </div>
-                    </div>
+                  <label>Bilder</label><br>
+                  <div *ngFor="let image of litter?.imageUrls">
+                    <img src="{{image.url}}" alt="{{image}}"class="img-responsive" style=" width:30%; height:auto;float:left; margin:5px;">
                   </div>
                   <button type="file" class="btn btn-primary">Ändra</button>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <label>Antal honor:</label>
-                  <input type="number" formControlName="numberOfFemales" value="{{litter?.numberOfFemales}}" class="form-control">
-                </div>
-                <div class="col-sm-6">
-                    <label>Antal hanar:</label>
-                    <input type="number" formControlName="numberOfMales" value="{{litter?.numberOfMales}}" class="form-control">
-                  </div>
               </div>
               <div class="row">
                 <div class="col-md-4">
@@ -117,22 +103,31 @@
                 </div>
             </section>
 
+            <section id="status" class="sections">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h4>Kullens status</h4>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                      Aktiv kull <input type="radio" name="status">
+                    </div>
+                    <div class="col-md-4">
+                      Arkiverad kull <input type="radio" name="status">
+                    </div>
+                    <div class="col-md-4">
+                      Tidigare kull <input type="radio" name="status">
+                    </div>
+                  </div>
+              </section>
+
 
             <section id="management" class="sections">
               <div class="row">
-                  <div class="col-sm-6">
+                  <div class="col-sm-12">
                     <button type="submit" class="btn btn-success" [disabled]="litterForm.pristine">Uppdatera</button>
                     <button type="button" class="btn btn-primary">Tillbaka</button>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div class="col-sm-6">
-                        Arkivera kull <input type="checkbox">
-                      </div>
-                      <div class="col-sm-6">
-                        Tidigare kull <input type="checkbox">
-                      </div>
-                    </div>
                   </div>
                 </div>
             </section>
@@ -183,9 +178,9 @@
                                           </div>
                                         </div>
                                         <div class="row">
-                                          <div class="col-sm-4">
+                                          <div class="col-sm-12">
                                             <button type="submit" class="btn btn-primary">Spara</button>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Avbryt</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Avbryt</button>
                                           </div>
                                         </div>
                                       </form>

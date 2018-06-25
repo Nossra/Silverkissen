@@ -16,6 +16,12 @@ export class CatParentsIndexComponent implements OnInit {
     private catService: CatService
   ) { }
 
+  delete(parent: Cat) {
+    this.catService.delete(parent).subscribe(x => {
+      window.location.reload();
+    });
+  }
+
   ngOnInit() {
     this.catService.getParents().subscribe(x => {
       this.parents = x;

@@ -72,6 +72,11 @@ export class CatService {
         return this.http.post<Cat>(this.url, cat);
     }
 
+    public delete(cat: Cat) : Observable<Cat> {
+        let url = this.url+cat.id;
+        return this.http.delete<Cat>(url);
+    }
+
     public static stringHelper(value:string) : string {
         let helpedString: string = "";
         for (let i = 0; i < value.length; i++) {
