@@ -24,18 +24,15 @@
                   <button type="file" class="btn btn-primary">Ändra</button>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <label>Vaccinerade</label>
-                  <input type="checkbox" formControlName="vaccinated" value="{{litter?.vaccinated}}" [(ngModel)]="vaccinated" style="padding-top:5px;">
+              <div class="row" style="margin-top:20px;">
+                <div class="col-md-4 checkbox">
+                  <label>Vaccinerade <input type="checkbox" formControlName="vaccinated" value="{{litter?.vaccinated}}" [(ngModel)]="vaccinated" style="padding-top:5px;"></label>
                 </div>
-                <div class="col-md-4">
-                  <label>SVERAK</label>
-                  <input type="checkbox" formControlName="pedigree" value="{{litter?.pedigree}}" [(ngModel)]="pedigree">
+                <div class="col-md-4 checkbox">
+                  <label>SVERAK <input type="checkbox" formControlName="pedigree" value="{{litter?.pedigree}}" [(ngModel)]="pedigree"></label>
                 </div>
-                <div class="col-md-4">
-                  <label>Chippade</label>
-                  <input type="checkbox" formControlName="chipped" value="{{litter?.chipped}}" [(ngModel)]="chipped">
+                <div class="col-md-4 checkbox">
+                  <label>Chippade <input type="checkbox" formControlName="chipped" value="{{litter?.chipped}}" [(ngModel)]="chipped"></label>
                 </div>
               </div>
           </section>
@@ -110,18 +107,17 @@
                   </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
-                      Aktiv kull <input type="radio" name="status">
-                    </div>
-                    <div class="col-md-4">
-                      Arkiverad kull <input type="radio" name="status">
-                    </div>
-                    <div class="col-md-4">
-                      Tidigare kull <input type="radio" name="status">
-                    </div>
+                  <div class="col-md-4 radio">
+                    <label><input type="radio" name="status" formControlName="status" value="Aktiv" [checked]="litter?.status === 'Aktiv'"> Aktiv</label>
                   </div>
+                  <div class="col-md-4 radio">
+                    <label><input type="radio" name="status" formControlName="status" value="Arkiverad" [checked]="litter?.status === 'Arkiverad'"> Arkiverad kull</label>
+                  </div>
+                  <div class="col-md-4 radio">
+                    <label><input type="radio" name="status" formControlName="status" value="Tidigare kull" [checked]="litter?.status === 'Tidigare kull'"> Tidigare kull </label>
+                  </div> 
+                </div>
               </section>
-
 
             <section id="management" class="sections">
               <div class="row">
@@ -131,6 +127,11 @@
                   </div>
                 </div>
             </section>
+
+          </form>
+        </div>
+      </div>
+    </div>
                                           
                              <!-- KITTENS MODAL -->
                              <div *ngFor="let kitten of litter?.kittens">
@@ -252,8 +253,5 @@
                                                 </div>
                                               </div>
                                             </div> -->
-        </form>
-      </div>
-    </div>
-  </div>
+
 

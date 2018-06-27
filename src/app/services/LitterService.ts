@@ -29,8 +29,7 @@ export class LitterService {
         let updateUrl = this.url+id+"?";
 
         if (litter.notes != null) {
-            let notes: string = LitterService.stringHelper(litter.notes);
-            updateUrl += "&notes=" +notes;
+            updateUrl += "&notes=" + LitterService.stringHelper(litter.notes);
         }
         if (litter.numberOfFemales != null) {
             updateUrl += "&females=" + litter.numberOfFemales;
@@ -47,10 +46,13 @@ export class LitterService {
         if (litter.chipped != null) {
             updateUrl += "&chipped=" + LitterService.booleanHelper(litter.chipped);
         }
+        if (litter.status != null) {
+            updateUrl += "&litterstatus=" + LitterService.stringHelper(litter.status);
+        }
 
 
         console.log("updateUrl: " + updateUrl);
-        return this.http.patch<Litter>(updateUrl, litter);
+        return this.http.patch<Litter>(updateUrl);
     }
 
     public create(litter: Litter) : Observable<Litter> {

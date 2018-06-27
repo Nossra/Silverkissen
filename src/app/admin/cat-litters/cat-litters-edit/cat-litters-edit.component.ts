@@ -6,6 +6,7 @@ import { LitterService } from '../../../services/litterService';
 import { Image } from '../../../entities/image';
 import { Cat } from '../../../entities/cat';
 import { CatService } from '../../../services/CatService';
+import { LitterStatus } from '../../../entities/LitterStatus';
 
 @Component({
   selector: 'app-cat-litters-edit',
@@ -30,14 +31,13 @@ export class CatLittersEditComponent implements OnInit {
     private formBuilder: FormBuilder) {
       this.litterForm = formBuilder.group({
         'notes' : null,
-        'numberOfFemales' : null,
-        'numberOfMales' : null,
         'kittens' : null,
         'parents' : null,
         'pedigree' : null,
         'vaccinated' : null,
         'chipped' : null,
-        'imageUrls' : null
+        'imageUrls' : null,
+        'status' : null,
       });
 
       this.kittenForm = formBuilder.group({
@@ -74,6 +74,7 @@ export class CatLittersEditComponent implements OnInit {
       this.vaccinated = x["vaccinated"];
       this.pedigree = x["pedigree"];
       this.chipped = x["chipped"];
+      console.log(this.litter);
     })
   }
 }
