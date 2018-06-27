@@ -5,6 +5,8 @@
   </div>
 </div>
 </section>
+
+
 <section *ngFor="let litter of litters" style="background-color:white; padding:10px; margin:10px;">
   <div class="row">
     <div class="col-md-8">
@@ -14,14 +16,19 @@
       <img src="{{litter.displayPicture}}" alt="Kattungar" style="width:100%; height:auto;" class="img-responsive"> <!-- {{litter.cardImageUrl}} -->
     </div>
   </div>
+  <hr>
   <div class="row">
-      <div class="col-md-12">
-        <hr>
-        <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#litter' + litter.id">Ta bort</button>
-        <a class="btn btn-primary" [routerLink]="['/admin', {outlets: {adminOutlet:['litters', litter.id]}}]">Editera</a>
-      </div>
+    <div class="col-md-9">
+      <p><i>{{litter.status}}</i></p>
     </div>
+    <div class="col-md-3">
+      <a class="btn btn-primary" [routerLink]="['/admin', {outlets: {adminOutlet:['litters', litter.id]}}]">Editera</a>
+      <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#litter' + litter.id">Ta bort</button>
+    </div>
+  </div>
 </section>
+
+
 <section>
   <div class="row" style="margin: 10px;">
     <div class="col-md-12">

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AboutComponent } from './about/about.component';
-import { OurCatsComponent } from './our-cats/our-cats.component';
 import { EarlierLittersComponent } from './litter/earlier-litters/earlier-litters.component';
 import { PlannedLittersComponent } from './litter/planned-litters/planned-litters.component';
 import { IndexLitterComponent } from './litter/index-litter/index-litter.component';
@@ -24,7 +23,6 @@ const routes: Routes = [
   { path: 'tidigare-kullar', component: EarlierLittersComponent },
   { path: 'planerade-kullar', component: PlannedLittersComponent },
   { path: 'kattungar', component: IndexLitterComponent },
-  { path: 'katter', component: OurCatsComponent },
   { path: 'kattungar/:id', component: ReadmoreLitterComponent },
   { path: 'admin', component: AdminIndexComponent, canActivate: [AuthGuardService] ,children:[
     { path: 'litters/:id', component: CatLittersEditComponent, canActivate: [AuthGuardService], outlet: 'adminOutlet'},

@@ -20,7 +20,7 @@ export class IndexLitterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.litterService.getAll().subscribe(x => {
+    this.litterService.getActiveLitters().subscribe(x => {
       this.litters = x;
     })
   }

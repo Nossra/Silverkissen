@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { LoginComponent } from './login/login.component';
 import { AboutComponent } from './about/about.component';
-import { OurCatsComponent } from './our-cats/our-cats.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LitterModule } from './litter/litter.module';
 import { LitterService } from './services/litterService';
@@ -30,8 +29,7 @@ export function tokenGetterFn() {
     AppComponent,
     NavComponent,
     LoginComponent,
-    AboutComponent,
-    OurCatsComponent
+    AboutComponent
   ],
   imports: [
     BrowserModule,
