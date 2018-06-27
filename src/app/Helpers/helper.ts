@@ -18,5 +18,13 @@ export class Helpers {
                 return 0;
         }   
     }
+
+    public static lineBreakHelper(value:string) : string {
+        let helpedString: string = "";
+        for (let i = 0; i < value.length; i++) {
+            helpedString += value[i].replace("\n", "<br>");
+        }
+        return helpedString;
+    }
 }
 

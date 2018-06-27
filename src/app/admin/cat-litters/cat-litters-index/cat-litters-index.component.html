@@ -10,7 +10,7 @@
 <section *ngFor="let litter of litters" style="background-color:white; padding:10px; margin:10px;">
   <div class="row">
     <div class="col-md-8">
-      {{litter.notes}}
+      <p [innerHTML]="litter.notes"></p>
     </div>
     <div class="col-md-3 offset-1">
       <img src="{{litter.displayPicture}}" alt="Kattungar" style="width:100%; height:auto;" class="img-responsive"> <!-- {{litter.cardImageUrl}} -->

@@ -23,18 +23,16 @@ export class LitterService {
     public getAll() : Observable<Array<Litter>> {
         return this.http.get<Array<Litter>>(this.url);
     }
-
     public getLitterById(id: number) : Observable<Litter> {
         return this.http.get<Litter>(this.url+id);
     }
-
-    public getActiveLitters() : Observable<Litter> {
+    public getActiveLitters() : Observable<Array<Litter>> {
         return this.http.get<Array<Litter>>(this.activeLittersUrl);
     }
-    public getArchivedLitters() : Observable<Litter> {
+    public getArchivedLitters() : Observable<Array<Litter>> {
         return this.http.get<Array<Litter>>(this.archivedLittersUrl);
     }
-    public getEarlierLitters() : Observable<Litter> {
+    public getEarlierLitters() : Observable<Array<Litter>> {
         return this.http.get<Array<Litter>>(this.earlierLittersUrl);
     }
 
@@ -42,7 +40,7 @@ export class LitterService {
         let updateUrl = this.url+id+"?";
 
         if (litter.notes != null) {
-            updateUrl += "&notes=" + LitterService.stringHelper(litter.notes);
+            updateUrl += "&notes=" + LitterService.lineBreakHelper(LitterService.stringHelper(litter.notes));
         }
 /*         if (litter.numberOfFemales != null) {
             updateUrl += "&females=" + litter.numberOfFemales;
@@ -92,5 +90,13 @@ export class LitterService {
             case false: 
                 return 0;
         }   
+    }
+
+    public static lineBreakHelper(value:string) : string {
+        let helpedString: string = "";
+        for (let i = 0; i < value.length; i++) {
+            helpedString += value[i].replace("\n", "<br>");
+        }
+        return helpedString;
     }
 } 
