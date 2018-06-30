@@ -14,14 +14,13 @@
               <h4>Generellt</h4>
               <label>Anteckningar</label>
               <textarea formControlName="notes" value="{{litter?.notes}}" class="form-control"></textarea>
-            <!--   <span *ngIf="!litterForm.valid && litterForm.get('notes').touched" style="color:red;">Du måste ha med anteckningar.</span> -->
               <div class="row">
                 <div class="col-md-12">
                   <label>Bilder</label><br>
-                  <div *ngFor="let image of litter?.imageUrls">
+<!--                   <div *ngFor="let image of litter?.imageUrls">
                     <img src="{{image.url}}" alt="{{image}}"class="img-responsive" style=" width:30%; height:auto;float:left; margin:5px;">
-                  </div>
-                  <button type="file" class="btn btn-primary">Ändra</button>
+                  </div> -->
+                  <input type="file" id="displayPicture" (change)="onFileChange($event)" #fileInput>
                 </div>
               </div>
               <div class="row" style="margin-top:20px;">

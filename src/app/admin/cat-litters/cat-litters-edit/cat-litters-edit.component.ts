@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Litter } from '../../../entities/litter';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -23,6 +23,8 @@ export class CatLittersEditComponent implements OnInit {
   public vaccinated: boolean;
   public chipped: boolean;
   public pedigree: boolean;
+  @ViewChild('fileInput') fileInput: ElementRef;
+
   constructor(
     private litterService: LitterService,
     private catService: CatService,
@@ -36,7 +38,7 @@ export class CatLittersEditComponent implements OnInit {
         'pedigree' : null,
         'vaccinated' : null,
         'chipped' : null,
-        'imageUrls' : null,
+        'displayPicture' : null,
         'status' : null,
       });
 
@@ -53,9 +55,26 @@ export class CatLittersEditComponent implements OnInit {
       });
     }
 
+    onFileChange(event) {
+      let reader = new FileReader();
+      if(event.target.files && event.target.files.length > 0) {
+        let file = event.target.files[0];
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          this.litterForm.get('displayPicture').setValue({
+            filename: file.name,
+            filetype: file.type,
+            value: reader.result.split(',')[1]
+          })
+        };
+      }
+    }
+
   update(litter: Litter) {
+    console.log(litter.displayPicture);
     this.litterService.update(litter, this.litterID).subscribe(x => {
       this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
+      console.log(litter)
     });
   }
 

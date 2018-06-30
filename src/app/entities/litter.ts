@@ -13,11 +13,13 @@ export class Litter {
     public vaccinated:boolean;
     public chipped:boolean;
     public readyAt: Date
-    public displayPicture:string;
+    public displayPicture:string|any;
+    public images:Array<string|any>;
     public status: string;
 
     constructor() {
         this.parents = [];
+        this.images = [];
     }
 }
 

@@ -26,6 +26,7 @@ export class CatLittersIndexComponent implements OnInit {
   ngOnInit() {
     this.litterService.getAll().subscribe(x => {
       this.litters = x;
+      console.log(this.litters);
     });
   }
 

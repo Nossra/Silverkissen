@@ -1,5 +1,9 @@
 export class Image {
-    constructor(public title:string, public description:string, public url:string) {
+    public filename:string;
+    public filetype:string;
+    public value:string;
+
+    constructor() {
         
     }
 }

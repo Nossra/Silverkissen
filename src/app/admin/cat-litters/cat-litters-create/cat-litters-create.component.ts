@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Image } from '../../../entities/image';
 import { Cat } from '../../../entities/cat';
@@ -18,6 +18,7 @@ export class CatLittersCreateComponent implements OnInit {
   public parents: Array<Cat> = [];
   public moms: Array<Cat> = [];
   public dads: Array<Cat> = [];
+  @ViewChild('fileInput') fileInput: ElementRef;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -29,7 +30,8 @@ export class CatLittersCreateComponent implements OnInit {
       'numberOfKittens' : [null, [Validators.required], null],
       'dad' : [null, [Validators.required], null],
       'mom' : [null, [Validators.required], null],
-      'born' : [null, [Validators.required], null]
+      'born' : [null, [Validators.required], null],
+      'images' : null
     });
   }
 
@@ -38,23 +40,44 @@ export class CatLittersCreateComponent implements OnInit {
     litter.born = values.born;
     litter.numberOfKittens = values.numberOfKittens;
     litter.notes = values.notes;
+    litter.status = "Aktiv";
     for (let parent of this.parents) {
       if (parent.id == values.dad || parent.id == values.mom) {
         litter.parents.push(parent)
       }
     }
-    
+    if (this.images != undefined) {
+      litter.images = this.images;
+    }
     litter.numberOfKittens = values.numberOfKittens;
     this.litterService.create(litter).subscribe(x => {
       this.router.navigate(['/admin'])
     });
   }
 
+  
+  onFileChange(event) {
+    if(event.target.files && event.target.files.length > 0) {
+      let files = event.target.files;
+      for (let i = 0; i < files.length; i++) {
+        let reader = new FileReader();
+        reader.readAsDataURL(files[i]);
+        reader.onload = () => {
+          let image:any = {
+            filename: files[i].name,
+            filetype: files[i].type,
+            value: reader.result
+          } 
+          this.images.push(image);
+        }
+      }
+    }
+  }
+
   ngOnInit() {
     this.catService.getParents().subscribe(x => {
       this.parents = x;
       for (let i = 0; i < this.parents.length; i++) {
-        console.log(this.parents[i].sex);
         if (this.parents[i].sex == "Hane") {
           this.dads.push(this.parents[i]);
         } else {

@@ -63,7 +63,7 @@ export class LitterService {
 
 
         console.log("updateUrl: " + updateUrl);
-        return this.http.patch<Litter>(updateUrl);
+        return this.http.patch<Litter>(updateUrl, litter);
     }
 
     public create(litter: Litter) : Observable<Litter> {
