@@ -51,12 +51,13 @@ export class CatLittersCreateComponent implements OnInit {
     }
     litter.numberOfKittens = values.numberOfKittens;
     this.litterService.create(litter).subscribe(x => {
-      this.router.navigate(['/admin'])
+      this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
     });
   }
 
   
   onFileChange(event) {
+    this.images = [];
     if(event.target.files && event.target.files.length > 0) {
       let files = event.target.files;
       for (let i = 0; i < files.length; i++) {

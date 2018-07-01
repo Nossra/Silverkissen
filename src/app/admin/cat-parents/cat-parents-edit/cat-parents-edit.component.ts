@@ -39,8 +39,7 @@ export class CatParentsEditComponent implements OnInit {
   update(values: Cat) {
     console.log(values);
     this.catService.update(values, this.parent.id).subscribe(x => {
-     // this.router.navigate([{outlets : {'adminOutlet' : 'parents'}}])
-     
+      this.router.navigate(['/admin',{outlets:{adminOutlet:'parents'}}])
     });
   }
 
@@ -50,9 +49,9 @@ export class CatParentsEditComponent implements OnInit {
     });
     this.catService.findById(this.parentId).subscribe(x => {
       this.parent = x;
-      this.parent.pedigree = x["pedigree"]
-      this.parent.vaccinated = x["vaccinated"];
-      this.parent.chipped = x["chipped"];
+      this.pedigree = x["pedigree"]
+      this.vaccinated = x["vaccinated"];
+      this.chipped = x["chipped"];
     });
   }
 

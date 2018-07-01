@@ -33,14 +33,14 @@
           </div>
 
           <div class="row">
-            <div class="col-md-4">
-              Vaccinerad <input type="checkbox" value="{{parent?.vaccinated}}" formControlName="vaccinated">
+            <div class="col-md-4 checkbox">
+              <label>Vaccinerade <input type="checkbox" formControlName="vaccinated" value="{{parent?.vaccinated}}" [(ngModel)]="vaccinated"></label>
             </div>
-            <div class="col-md-4">
-              SVERAK <input type="checkbox" value="{{parent?.peedigree}}" formControlName="pedigree">
+            <div class="col-md-4 checkbox">
+              <label>SVERAK <input type="checkbox" formControlName="pedigree" value="{{parent?.pedigree}}" [(ngModel)]="pedigree"></label>
             </div>
-            <div class="col-md-4">
-              Chippad <input type="checkbox" value="{{parent?.chipped}}" formControlName="chipped">
+            <div class="col-md-4 checkbox">
+              <label>Chippade <input type="checkbox" formControlName="chipped" value="{{parent?.chipped}}" [(ngModel)]="chipped"></label>
             </div>
           </div>
 

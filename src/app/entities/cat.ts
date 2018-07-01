@@ -1,3 +1,5 @@
+import { Image } from "./image";
+
 export class Cat {
     public id:number;
     public isWonderful: boolean = true;
@@ -12,7 +14,8 @@ export class Cat {
     public notes:string;
     public parent:boolean;
     public born:Date;
+    public images:Array<Image>
     constructor() {
-
+        this.images = [];
     }
 }

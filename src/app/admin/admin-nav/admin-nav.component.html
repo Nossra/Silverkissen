@@ -1,6 +1,9 @@
 <div class="admin-nav">
-  <p class="navbar-brand admin-panel">Admin</p>
+  <!-- <p class="navbar-brand admin-panel">Admin</p> -->
   <ul class="nav flex-column ">
+    <li class="nav-item">
+        <a [routerLink]="['/admin']" class="nav-link">Admin</a>
+      </li>
     <li class="nav-item">
       <a [routerLink]="['/admin',{outlets:{adminOutlet:'litters'}}]" class="nav-link">Kullar</a>
     </li>

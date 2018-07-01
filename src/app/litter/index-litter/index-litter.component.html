@@ -21,15 +21,18 @@
         </div>
         <div class="row">
           <div class="col-sm-12">
-              SVERAK: {{ litter.pedigree ? 'Ja' : 'Nej' }}<br>
-              Vaccinerad: {{ litter.vaccinated ? 'Ja' : 'Nej'  }}<br>
-              Chippad: {{ litter.chipped ? 'Ja' : 'Nej'  }}<br><br>
+<!--               {{ litter.pedigree ? 'Stamtavla i SVERAK' : '' }}<br>
+              {{ litter.vaccinated ? 'Vaccinerad' : '' }}<br>
+              {{ litter.chipped ? 'Chippad' : ''  }}<br><br> -->
+              <div *ngIf="litter.pedigree">Stamtavla i SVERAK</div>
+              <div *ngIf="litter.vaccinated">Vaccinerad</div>
+              <div *ngIf="litter.chipped">Chippad</div>
               <button type="button" (click)="readMore(litter)" class="btn btn-success">Läs mer</button>
           </div>
         </div>
       </div>
       <div class="col-md-6">
-        <img class="img-fluid" style="max-width:100%; height:auto;" id="cardImage{{ litter.id }}" src="{{ litter.displayPicture }}" alt="Stefan!">      <!-- style="height: 300px; width: 100%; display: block;" -->
+        <img class="img-fluid" style="max-width:100%; height:auto;" id="cardImage{{ litter.id }}" src="{{ litter.images[0].value }}" alt="kattungar!">      <!-- style="height: 300px; width: 100%; display: block;" -->
       </div>
     </div>
   </div>

@@ -25,6 +25,7 @@ export class CatParentsIndexComponent implements OnInit {
   ngOnInit() {
     this.catService.getParents().subscribe(x => {
       this.parents = x;
+      console.log(this.parents);
     });
   }
 

@@ -1,3 +1,15 @@
 .modalPosition {
     position:fixed; top:15%;
 }
+
+.object {
+    background-color:white; padding:10px; float:left; margin-right:10px; margin-bottom:10px;
+}
+
+h5{
+    font-size:15px;
+}
+
+.index-header {
+    margin-bottom:20px;
+}
