@@ -1,20 +1,34 @@
-.jumbotron {
-    color:white;
-    width:100%;
-    text-align:center;
-    margin-bottom: 15px;
-    margin-top:88px;
+.object {
+    background-color:rgb(255, 255, 255) !important;
+    padding:10px; float:left; 
+    margin-right:50px;
+    margin-bottom:10px;
 }
 
-.jumbotron-wrapper {
-    background-image:url("/assets/images/background-cat.jpg");
+.index-header {
+    margin-bottom:20px;
 }
 
-.innerCol {
-    float:left;
-    margin-right:10px;
+h1 {
+    font-family: "Tangerine", serif;
+    font-size:50px;
+    font-weight: 100;
+}
+h5 {
+    font-size:20px;
+    color:rgb(52, 159, 201);
+    font-weight: 100;
+    font-family: "Roboto", serif;
 }
 
-.custom-card-margin {
-    margin-top: -15px;
+h4 {
+    font-size:15px;
+    color:rgb(0, 0, 0);
+    font-weight: 100;
+    font-family: "Roboto", serif;
+}
+
+p {
+    font-family: "Roboto", serif;
+    color: rgb(0, 0, 0)
 }
