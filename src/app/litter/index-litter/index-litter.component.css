@@ -1,8 +1,5 @@
 .object {
-    background-color:rgb(255, 255, 255) !important;
-    padding:10px; float:left; 
-    margin-right:50px;
-    margin-bottom:10px;
+    padding-top:30px; padding-bottom:15px; margin-bottom:10px; background-color:white;
 }
 
 .index-header {
