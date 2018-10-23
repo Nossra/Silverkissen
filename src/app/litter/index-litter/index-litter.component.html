@@ -12,8 +12,8 @@
 <section class="main-body">
   <div class="container">
     <div class="row">
-      <div class="col-md-3 column text-center">
-          <h1>Nuvarande Ragdollungar</h1>
+      <div class="col-md-3 column">
+          <h1 class="text-center">Nuvarande Ragdollungar</h1>
           <p>
             Här samlar vi information om alla våra kattungar som är redo, eller snart är redo, att tingas!<br><br>
             Datumet för när respektive kull är flyttklar kan komma att ändras beroende på bland annat veterinärstider.
@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="row" *ngFor="let litter of litters">
-          <div class="col-md-12" class="column">
+          <div class="col-md-12" class="column object">
             <div id="controls{{litter.id}}" class="col-md-12 carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 <div *ngFor="let image of litter.images; let i = index" class="carousel-item {{ (i == 0) ? 'active' : ''}}">
@@ -54,22 +54,24 @@
                 <div *ngIf="litter.pedigree"><p>Stamtavla i SVERAK</p></div>
                 <div *ngIf="litter.vaccinated"><p>Vaccinerad</p></div>
                 <div *ngIf="litter.chipped"><p>Chippad</p></div>
-                <button type="button" (click)="readMore(litter)" class="btn btn-info form-control">Läs mer</button>
+                <button type="button" (click)="readMore(litter)" class="btn btn-primary">Läs mer</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-3 text-center column">
-        <form>
-          <h5>Intresserad?</h5>
-          <p>Kontakta oss här för mer information om våra katter!</p>
-          <label>E-post</label>
-          <input type="text" placeholder="exempel@exempel.se" class="form-control">
-          <label>Meddelande</label>
-          <textarea placeholder="Ditt meddelande" class="form-control"></textarea>
-          <button type="submit" class="btn btn-primary" style="margin-top:5px;">Skicka</button>
-        </form>
+      <div class="col-md-3 column">
+        <div class="fixed">
+          <form style="max-width:95%;">
+            <h5>Intresserad?</h5>
+            <p>Kontakta oss här för mer information om våra katter!</p>
+            <label>E-post</label>
+            <input type="text" placeholder="exempel@exempel.se" class="form-control">
+            <label>Meddelande</label>
+            <textarea placeholder="Ditt meddelande" class="form-control"></textarea>
+            <button type="submit" class="btn btn-primary" style="margin-top:5px;">Skicka</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

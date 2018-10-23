@@ -12,7 +12,6 @@ import { Image } from '../../entities/image';
 export class IndexLitterComponent implements OnInit {
   public litters: Litter[] = new Array<Litter>();
   images: Array<Image> = [];
-
   constructor(
     private litterService: LitterService,
     private router:Router) { }
