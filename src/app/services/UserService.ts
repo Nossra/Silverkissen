@@ -24,7 +24,7 @@ export class UserService {
     }
 
     public login(values:any) {
-        return this.http.post("http://localhost:8080/silverkissen/api/user", values).subscribe((x: TokenObject) => {
+        return this.http.post("api.silverkissen.se/silverkissen/api/user", values).subscribe((x: TokenObject) => {
             localStorage.setItem('token', x.token);
             this.token = x.token;
             this.router.navigate(['admin']);

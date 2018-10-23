@@ -7,11 +7,13 @@ import { Litter } from "../entities/litter";
 
 @Injectable()
 export class LitterService {
-    private url:string = "http://localhost:8080/silverkissen/api/litters/";
-    private activeLittersUrl:string = "http://localhost:8080/silverkissen/api/litters/active";
-    private archivedLittersUrl:string = "http://localhost:8080/silverkissen/api/litters/archived";
-    private earlierLittersUrl:string = "http://localhost:8080/silverkissen/api/litters/earlier";
-    
+    private baseUrl: string = "http://api.silverkissen.se/"
+    private url:string = this.baseUrl + "silverkissen/api/litters/";
+    private activeLittersUrl:string = this.baseUrl + "silverkissen/api/litters/active";
+    private archivedLittersUrl:string = this.baseUrl + "silverkissen/api/litters/archived";
+    private earlierLittersUrl:string = this.baseUrl + "silverkissen/api/litters/earlier";
+    private testLitters: string = "../assets/litters.json"
+    private earlierLitterFixedData:string = "../assets/earlier-litters.json"
     constructor(private http: HttpClient) {
 
     }
@@ -27,13 +29,13 @@ export class LitterService {
         return this.http.get<Litter>(this.url+id);
     }
     public getActiveLitters() : Observable<Array<Litter>> {
-        return this.http.get<Array<Litter>>(this.activeLittersUrl);
+        return this.http.get<Array<Litter>>(this.testLitters);
     }
     public getArchivedLitters() : Observable<Array<Litter>> {
         return this.http.get<Array<Litter>>(this.archivedLittersUrl);
     }
     public getEarlierLitters() : Observable<Array<Litter>> {
-        return this.http.get<Array<Litter>>(this.earlierLittersUrl);
+        return this.http.get<Array<Litter>>(this.earlierLitterFixedData);
     }
 
     public update(litter: Litter, id:number) : Observable<Litter> {

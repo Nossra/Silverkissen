@@ -1,8 +1,9 @@
 a {
-    font-size:20px;
-    font-family: "Roboto", sans-serif;
+    font-size:25px;
+    font-family: "Permanent Marker", sans-serif;
     text-align: center;
     color:white !important;
+    font-weight: 100;
 }
 
 a:hover {

@@ -1,18 +1,23 @@
+<!--
 <section>
+  <div class="container">
     <div class="row">
-      <div class="col-md-12 text-center">
+      <div class="col-md-12">
           <h1><strong>Nuvarande kattungar</strong></h1>
       </div>
     </div>
-</section>
-<section style="padding-bottom:15px;">
+  </div>
+</section> -->
+
+<section class="main-body">
   <div class="container">
     <div class="row">
-      <div class="col-md-3 text-center">
-        <p>
-          Här samlar vi information om alla våra kattungar som är redo, eller snart är redo, att tingas!<br><br>
-          Datumet för när respektive kull är flyttklar kan komma att ändras beroende på bland annat veterinärstider och annat.
-        </p>
+      <div class="col-md-3 column text-center">
+          <h1>Nuvarande Ragdollungar</h1>
+          <p>
+            Här samlar vi information om alla våra kattungar som är redo, eller snart är redo, att tingas!<br><br>
+            Datumet för när respektive kull är flyttklar kan komma att ändras beroende på bland annat veterinärstider.
+          </p>
       </div>
       <div class="col-md-6">
         <div *ngIf="litters.length == 0" class="row">
@@ -21,29 +26,27 @@
           </div>
         </div>
         <div class="row" *ngFor="let litter of litters">
-          <div class="col-md-12" style="padding-top:30px; padding-bottom:15px; margin-bottom:10px; background-color:white;">
-            <div id="carouselExampleControls" class="col-md-12 carousel slide" data-ride="carousel">
+          <div class="col-md-12" class="column">
+            <div id="controls{{litter.id}}" class="col-md-12 carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 <div *ngFor="let image of litter.images; let i = index" class="carousel-item {{ (i == 0) ? 'active' : ''}}">
-                  <img class="d-block w-100" src="{{image.value}}" alt="{{image.filename}}" style="width:200px; height: auto;">
+                  <img class="d-block w-100" src="{{image}}" alt="{{image.filename}}"> <!-- Change value to image.value in live -->
                 </div>
               </div>
-              <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+              <a class="carousel-control-prev" href="#controls{{litter.id}}" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
               </a>
-              <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+              <a class="carousel-control-next" href="#controls{{litter.id}}" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
               </a>
             </div>
             <hr>
+            <span class="text-primary"><h5>Flyttklara {{litter.readyAt}}</h5></span>
             <p [innerHTML]="litter.notes"></p>
             <hr>
-            <span class="text-primary"><h5>Flyttklara {{litter.readyAt}}</h5></span>
-            <hr>
             <div class="row">
-              <hr>
               <div class="col-sm-12"><p>Födda: {{litter.born}}</p></div>
             </div>
             <div class="row">
@@ -57,12 +60,17 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 text-center">
-          <p>
-            Här samlar vi information om alla våra kattungar som är redo, eller snart är redo, att tingas!<br><br>
-            Datumet för när respektive kull är flyttklar kan komma att ändras beroende på bland annat veterinärstider och annat.
-          </p>
-        </div>
+      <div class="col-md-3 text-center column">
+        <form>
+          <h5>Intresserad?</h5>
+          <p>Kontakta oss här för mer information om våra katter!</p>
+          <label>E-post</label>
+          <input type="text" placeholder="exempel@exempel.se" class="form-control">
+          <label>Meddelande</label>
+          <textarea placeholder="Ditt meddelande" class="form-control"></textarea>
+          <button type="submit" class="btn btn-primary" style="margin-top:5px;">Skicka</button>
+        </form>
+      </div>
     </div>
   </div>
 </section>

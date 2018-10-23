@@ -1,5 +1,5 @@
 [{
-    "id":"1",
+    "id":"3",
     "numberOfKiteens":"3",
     "numberOfMales":"2",
     "numberOfFemales":"1",
@@ -44,16 +44,16 @@
             "pedigree" : true
         }
     ],
-    "notes" : "Andra kullen från Tiger och Mirabelle! De kom fort efter den första! Som vanligt så är alla vaccinerade, chippade och har stamtavla hos SVERAK",
+    "notes" : "En av våra allra tidigaste kullar från Mirabelle!",
     "SVERAK" : true,
     "vaccinated" : true,
     "chipped" : true,
     "readyAt":"2018-07-30",
     "breed" : "Ragdoll",
-    "images" : ["../assets/images/stef.jpg", "../assets/images/stef2.jpg"]
+    "images" : ["../assets/images/otto2.jpg"]
 },
 {
-    "id":"2",
+    "id":"4",
     "numberOfKiteens":"3",
     "numberOfMales":"3",
     "numberOfFemales":"0",
@@ -104,6 +104,6 @@
     "chipped" : false,
     "readyAt":"2018-010-30",
     "breed" : "Ragdoll/Sibirisk Skogskatt",
-    "images" : ["assets/images/cat1.jpg", "assets/images/cat2.jpg", "assets/images/cat4.jpg"]
+    "images" : ["../assets/images/ivan1.jpg"]
 }
 ]

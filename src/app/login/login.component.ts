@@ -11,7 +11,7 @@ import { UserService } from '../services/UserService';
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
-
+  public statusCode: number;
   constructor(private router:Router,
     private userService: UserService,
     private formBuilder: FormBuilder) { 

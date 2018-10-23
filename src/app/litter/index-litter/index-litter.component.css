@@ -1,4 +1,4 @@
-.object {
+.column {
     padding-top:30px; padding-bottom:15px; margin-bottom:10px; background-color:white;
 }
 
@@ -7,15 +7,17 @@
 }
 
 h1 {
-    font-family: "Tangerine", serif;
-    font-size:50px;
+    font-size:30px;
+    color: rgb(52, 159, 201);
     font-weight: 100;
+    font-family: "Black Han Sans", serif;
 }
 h5 {
     font-size:20px;
-    color:rgb(52, 159, 201);
+   /* color:rgb(255, 153, 0);  nice orange */
+    color: rgb(52, 159, 201);
     font-weight: 100;
-    font-family: "Roboto", serif;
+    font-family: "Black Han Sans", serif;
 }
 
 h4 {
@@ -28,4 +30,8 @@ h4 {
 p {
     font-family: "Roboto", serif;
     color: rgb(0, 0, 0)
+}
+
+.main-body {
+    padding-bottom:15px; margin-top:-30px
 }

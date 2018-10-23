@@ -19,6 +19,7 @@ import { Helpers } from './Helpers/helper';
 import { CatService } from './services/CatService';
 import { AuthGuardService } from './services/AuthGuard';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { FooterComponent } from './footer/footer.component';
 
 export function tokenGetterFn() {
   return localStorage.getItem('token');
@@ -29,7 +30,8 @@ export function tokenGetterFn() {
     AppComponent,
     NavComponent,
     LoginComponent,
-    AboutComponent
+    AboutComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

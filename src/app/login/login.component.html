@@ -1,27 +1,27 @@
-<div class="row">
-  <div class="col-lg-4 offset-lg-4">
-     <div class="container">
-        <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)"  style="margin: 20px;">
-            <label>Email</label>
-            <input type="text" 
-              class="form-control" 
-              style="margin-bottom: 10px !important;"
-              id="email" 
-              name="email"
-              formControlName="email">
-              <label>Lösenord</label>
-              <input type="password" 
-              class="form-control" 
-              style="margin-bottom: 10px !important;"
-              id="password" 
-              name="password"
-              formControlName="password">
-            <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Logga in</button>
-           <span class="warning" 
-            *ngIf="statusCode == 401">
-              Incorrect username or password.
-          </span>
-          </form>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4 offset-lg-4">
+      <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)"  style="margin: 20px;">
+          <label>Email</label>
+          <input type="text" 
+            class="form-control" 
+            style="margin-bottom: 10px !important;"
+            id="email" 
+            name="email"
+            formControlName="email">
+            <label>Lösenord</label>
+            <input type="password" 
+            class="form-control" 
+            style="margin-bottom: 10px !important;"
+            id="password" 
+            name="password"
+            formControlName="password">
+          <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Logga in</button>
+          <span class="warning" 
+          *ngIf="statusCode == 401">
+            Incorrect username or password.
+        </span>
+      </form>
      </div>
   </div>
 </div>
