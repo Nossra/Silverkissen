@@ -20,16 +20,20 @@
     margin-bottom:20px;
 }
 
+.main-body {
+    padding-bottom:15px;
+}
+
 h1 {
     font-size:30px;
-    color: rgb(52, 159, 201);
+    color: rgb(94, 170, 196);
     font-weight: 100;
     font-family: "Black Han Sans", serif;
 }
 h5 {
     font-size:20px;
    /* color:rgb(255, 153, 0);  nice orange */
-    color: rgb(52, 159, 201);
+    color: rgb(94, 170, 196);
     font-weight: 100;
     font-family: "Black Han Sans", serif;
 }
@@ -44,8 +48,4 @@ h4 {
 p {
     font-family: "Roboto", serif;
     color: rgb(0, 0, 0)
-}
-
-.main-body {
-    padding-bottom:15px;
 }

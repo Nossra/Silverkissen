@@ -17,9 +17,8 @@ import { CatParentsEditComponent } from './admin/cat-parents/cat-parents-edit/ca
 import { CatParentsCreateComponent } from './admin/cat-parents/cat-parents-create/cat-parents-create.component';
 
 const routes: Routes = [
-/*   { path: '', pathMatch:'full', redirectTo:'kattungar' }, */
+   { path: '', pathMatch:'full', component: AboutComponent }, 
   { path: 'login', component: LoginComponent },
-  { path: 'om-oss', component: AboutComponent },
   { path: 'tidigare-kullar', component: EarlierLittersComponent },
   { path: 'planerade-kullar', component: PlannedLittersComponent },
   { path: 'kattungar', component: IndexLitterComponent },
