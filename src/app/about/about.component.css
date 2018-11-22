@@ -2,24 +2,72 @@ h1 {
     font-size:30px;
     color: rgb(94, 170, 196);
     font-weight: 100;
-    font-family: "Black Han Sans", serif;
+    font-family: "Fredoka One", sans-serif;
 }
 h5 {
     font-size:20px;
    /* color:rgb(255, 153, 0);  nice orange */
     color: rgb(94, 170, 196);
     font-weight: 100;
-    font-family: "Black Han Sans", serif;
+    font-family: "Fredoka One", sans-serif;
 }
-
 h4 {
     font-size:15px;
     color:rgb(94, 170, 196);
     font-weight: 100;
-    font-family: "Roboto", serif;
+    font-family: "Fredoka One", sans-serif;
 }
 
 p {
     font-family: "Roboto", serif;
     color: rgb(0, 0, 0)
+}
+
+.banner {
+    max-width:100%;
+    background-image: url("assets/images/background-cat.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    top:-20px;
+}
+
+@media only screen and (min-width: 1200px) {
+    .banner-image {
+        max-width:550px;
+        padding:50px;
+        padding-top:100px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .banner-image {
+        max-width:500px;
+        padding:50px;
+        padding-top:100px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .banner-image {
+        max-width:400px;
+        padding:50px;
+        padding-top:100px;
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    .banner-image {
+        max-width:300px;
+        padding:50px;
+        padding-top:100px;
+    }
+}
+
+@media only screen and (max-width: 576) {
+    .banner-image {
+        max-width:200px;
+        padding:50px;
+        padding-top:50px;
+    }
 }

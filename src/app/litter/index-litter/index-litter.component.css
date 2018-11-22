@@ -28,21 +28,21 @@ h1 {
     font-size:30px;
     color: rgb(94, 170, 196);
     font-weight: 100;
-    font-family: "Black Han Sans", serif;
+    font-family: "Fredoka One", sans-serif;
 }
 h5 {
     font-size:20px;
    /* color:rgb(255, 153, 0);  nice orange */
     color: rgb(94, 170, 196);
     font-weight: 100;
-    font-family: "Black Han Sans", serif;
+    font-family: "Fredoka One", sans-serif;
 }
 
 h4 {
     font-size:15px;
     color:rgb(0, 0, 0);
     font-weight: 100;
-    font-family: "Roboto", serif;
+    font-family: "Fredoka One", sans-serif;
 }
 
 p {
