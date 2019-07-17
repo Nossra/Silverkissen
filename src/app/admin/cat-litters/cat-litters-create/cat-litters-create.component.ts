@@ -6,6 +6,8 @@ import { CatService } from '../../../services/CatService';
 import { Litter } from '../../../entities/litter';
 import { LitterService } from '../../../services/litterService';
 import { Router } from '@angular/router';
+import { LitterStatus } from '../../../entities/LitterStatus';
+import { Litter_Parent } from '../../../entities/litter_parent';
 
 @Component({
   selector: 'app-cat-litters-create',
@@ -18,6 +20,7 @@ export class CatLittersCreateComponent implements OnInit {
   public parents: Array<Cat> = [];
   public moms: Array<Cat> = [];
   public dads: Array<Cat> = [];
+  private bogusLitterId:number = 1; //.Net ore EF finds the real id automatically in the api.
   @ViewChild('fileInput') fileInput: ElementRef;
   
   constructor(
@@ -37,22 +40,31 @@ export class CatLittersCreateComponent implements OnInit {
 
   createLitter(values: any) {
     let litter: Litter = new Litter();
-    litter.born = values.born;
-    litter.numberOfKittens = values.numberOfKittens;
+    litter.birthDate = values.born;
+    litter.amountOfKids = values.numberOfKittens;
     litter.notes = values.notes;
-    litter.status = "Aktiv";
+    litter.status = LitterStatus.ACTIVE
     for (let parent of this.parents) {
       if (parent.id == values.dad || parent.id == values.mom) {
-        litter.parents.push(parent)
+        litter.parents.push(
+          new Litter_Parent(
+            parent.id,
+            this.bogusLitterId
+          )
+        )
       }
     }
     if (this.images != undefined) {
-      litter.images = this.images;
+      litter.litterImages = this.images;
     }
-    litter.numberOfKittens = values.numberOfKittens;
+    litter.amountOfKids = values.numberOfKittens;
     this.litterService.create(litter).subscribe(x => {
       this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
     });
+  }
+
+  abort() {
+    this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
   }
 
   

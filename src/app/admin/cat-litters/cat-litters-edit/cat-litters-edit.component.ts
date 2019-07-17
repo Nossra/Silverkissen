@@ -7,6 +7,7 @@ import { Image } from '../../../entities/image';
 import { Cat } from '../../../entities/cat';
 import { CatService } from '../../../services/CatService';
 import { LitterStatus } from '../../../entities/LitterStatus';
+import { Helpers } from '../../../Helpers/helper';
 
 @Component({
   selector: 'app-cat-litters-edit',
@@ -15,14 +16,14 @@ import { LitterStatus } from '../../../entities/LitterStatus';
 })
 export class CatLittersEditComponent implements OnInit {
 
-  public litter: Litter;
-  public litterID: number;
-  public litterForm: FormGroup;
-  public kittenForm: FormGroup;
-  public parentsForm: FormGroup;
-  public vaccinated: boolean;
-  public chipped: boolean;
-  public pedigree: boolean;
+  private litter: Litter;
+  private litterID: number;
+  private litterForm: FormGroup;
+  private kittenForm: FormGroup;
+  private parentsForm: FormGroup;
+  private vaccinated: boolean;
+  private chipped: boolean;
+  private pedigree: boolean;
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(
@@ -40,6 +41,8 @@ export class CatLittersEditComponent implements OnInit {
         'chipped' : null,
         'displayPicture' : null,
         'status' : null,
+        'readyDate' : null,
+        'birthDate' : null
       });
 
       this.kittenForm = formBuilder.group({
@@ -53,7 +56,7 @@ export class CatLittersEditComponent implements OnInit {
         'sex' : null,
         'color' : null
       });
-    }
+    } 
 
     onFileChange(event) {
       let reader = new FileReader();
@@ -70,18 +73,50 @@ export class CatLittersEditComponent implements OnInit {
       }
     }
 
-  update(litter: Litter) {
-    console.log(litter.displayPicture);
-    this.litterService.update(litter, this.litterID).subscribe(x => {
-      this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
-      console.log(litter)
+    putUpdate(litter: Litter) { 
+      if (litter.chipped != null) this.litter.chipped = litter.chipped;
+      if (litter.notes != null) this.litter.notes = litter.notes;
+      if (litter.pedigree != null) this.litter.pedigree = litter.pedigree;
+      if (litter.vaccinated != null) this.litter.vaccinated = litter.vaccinated;
+      if (litter.status != null) this.litter.status = litter.status;
+      if (litter.sverak != null) this.litter.sverak = litter.sverak;
+      if (litter.readyDate != null) this.litter.readyDate = litter.readyDate;
+      if (litter.birthDate != null) this.litter.birthDate = litter.birthDate;
+      console.log(litter);
+    this.litterService.putUpdate(this.litter).subscribe(x => {
+      this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])  
     });
   }
 
-  updateKitten(kitten: Cat, id:number) {
-    this.catService.update(kitten, id).subscribe(x => {
+  updateKitten(kitten:Cat, id:number) { 
+    let catToUpdate: Cat;
+    this.litter.kittens.forEach(function (kitteh) { 
+      if (kitteh.id == id) {
+        if (kitten.name != null) kitteh.name = kitten.name;
+        if (kitten.sex != null) kitteh.sex = kitten.sex;
+        if (kitten.color != null) kitteh.color = kitten.color;
+
+        catToUpdate = kitteh;
+        catToUpdate.id = id;
+      }
+     }); 
+    this.catService.putUpdate(catToUpdate).subscribe(x => {
       window.location.reload();
     })
+  }
+
+  closeKittenModal() {  
+
+  }
+
+  // updateKitten(kitten: Cat, id:number) { 
+  //   this.catService.update(kitten, id).subscribe(x => {
+  //     window.location.reload();
+  //   })
+  // }
+
+  abort() {
+    this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
   }
 
   ngOnInit() {
@@ -93,7 +128,10 @@ export class CatLittersEditComponent implements OnInit {
       this.vaccinated = x["vaccinated"];
       this.pedigree = x["pedigree"];
       this.chipped = x["chipped"];
+      this.litter.formattedReadyDate = Helpers.dateHelper(new Date(x["readyDate"]));
+      this.litter.statusText = Helpers.statusHelper(x["status"]);
+      this.litter.formattedBirthDate = Helpers.dateHelper(new Date(x["birthDate"]));
       console.log(this.litter);
     })
-  }
+  } 
 }

@@ -35,29 +35,29 @@
   <div *ngFor="let litter of litters" class="col-md-3 object">
     <div class="row">
       <div class="col-md-12">
-        <img src="{{litter?.images[0].value}}" alt="katt" style="width:100%; height:auto;" class="img-responsive">
+        <!-- <img src="{{litter?.images[0].value}}" alt="katt" style="width:100%; height:auto;" class="img-responsive"> -->
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
-        <h5>Föräldrar</h5> 
-        <p>{{ litter.parents[0].name }} och {{ litter.parents[1].name }}</p>
+        <h5>Föräldrar</h5>  
+        <p>
+          {{ litter.parents.length == 0 ? 'Ingen förälder funnen'
+             : litter.parents.length == 1 && litter.parents.length > 0 ? litter.parents[0].name
+             : litter.parents[0].name + ' och ' + litter.parents[1].name }}
+          </p>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-8">
-        <h5>Födda</h5>
-        <p>{{litter.born}}</p>
-      </div>
-      <div class="col-md-4">
-        <h5>Antal</h5>
-        <p>{{litter.numberOfKittens}}</p>
+      <div class="col-md-12">
+        <h5>Födda:</h5><p>{{litter.formattedBirthDate}}</p>
+        <h5>Antal ungar:</h5> <p>{{litter.amountOfKids}}</p>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
         <h5>Status</h5>
-        <p>{{litter.status}}</p>
+        <p>{{litter.statusText}}</p>
       </div>
     </div>
     <div class="row" style="margin-top:10px; margin-right:10px;">

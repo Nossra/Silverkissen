@@ -22,6 +22,10 @@
               <option value="Hane">Hane</option>
               <option value="Hona">Hona</option>
             </select>
+            <span style="color:red;"
+            *ngIf="createForm.controls['sex'].touched && createForm.controls['sex'].invalid">
+              Kön krävs..
+          </span>
           </div>
         </div>
 
@@ -42,9 +46,9 @@
         <div class="row">
           <div class="col-md-12">
             <label>Född</label>
-            <input type="date" formControlName="born" class="form-control">
+            <input type="date" formControlName="birthdate" class="form-control">
             <span style="color:red;"
-              *ngIf="createForm.controls['born'].touched && createForm.controls['born'].invalid">
+              *ngIf="createForm.controls['birthdate'].touched && createForm.controls['birthdate'].invalid">
                 Datum krävs..
             </span>
           </div>
@@ -79,7 +83,7 @@
         <div class="row">
           <div class="col-md-12">
             <button type="submit" class="btn btn-success" [disabled]="createForm.invalid">Spara kull</button>
-            <button type="button" class="btn btn-primary">Tillbaka</button>
+            <button type="button" (click)="abort()" class="btn btn-primary">Tillbaka</button>
           </div>
         </div>
       </section>

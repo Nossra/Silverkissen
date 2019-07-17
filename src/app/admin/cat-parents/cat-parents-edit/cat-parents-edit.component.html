@@ -9,45 +9,45 @@
 <section id="parentForm">
   <div class="row">
     <div class="col-md-12">
-      <form [formGroup]="parentForm" (ngSubmit)="update(parentForm.value)">
+      <form [formGroup]="parentForm" (ngSubmit)="putUpdate(parentForm.value)">
         <section id="general" class="sections">
 
           <div class="row">
             <div class="col-md-12">
               <label>Namn</label>
-              <input type="input" class="form-control" placeholder="{{parent?.name}}" formControlName="name">
+              <input type="input" class="form-control" value="{{parent?.name}}" formControlName="name">
               <label>Noteringar</label>
-              <textarea class="form-control" placeholder="{{parent?.notes}}" formControlName="notes"></textarea>
+              <textarea class="form-control" value="{{parent?.notes}}" formControlName="notes"></textarea>
               <label>Kön</label>
               <select type="input" class="form-control" value="{{parent?.sex}}" formControlName="sex">
                 <option value="Hane">Hane</option>
                 <option value="Hona">Hona</option>
               </select>
               <label>Ras</label>
-              <input type="input" class="form-control" placeholder="{{parent?.breed}}" formControlName="breed">
+              <input type="input" class="form-control" value="{{parent?.breed}}" formControlName="breed">
               <label>Färg</label>
-              <input type="input" class="form-control" placeholder="{{parent?.color}}" formControlName="color">
-              <label>Född</label>
-              <input type="date" class="form-control" placeholder="{{parent?.born}}" formControlName="born">
+              <input type="input" class="form-control" value="{{parent?.color}}" formControlName="color">
+              <label>Födelsedatum</label>
+              <input type="date" class="form-control" value="{{parent?.formattedBirthDate}}" formControlName="born">
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-4 checkbox">
-              <label>Vaccinerade <input type="checkbox" formControlName="vaccinated" value="{{parent?.vaccinated}}" [(ngModel)]="vaccinated"></label>
+              <label>Vaccinerad <input type="checkbox" formControlName="vaccinated" value="{{parent?.vaccinated}}" [(ngModel)]="vaccinated"></label>
             </div>
             <div class="col-md-4 checkbox">
               <label>SVERAK <input type="checkbox" formControlName="pedigree" value="{{parent?.pedigree}}" [(ngModel)]="pedigree"></label>
             </div>
             <div class="col-md-4 checkbox">
-              <label>Chippade <input type="checkbox" formControlName="chipped" value="{{parent?.chipped}}" [(ngModel)]="chipped"></label>
+              <label>Chippad <input type="checkbox" formControlName="chipped" value="{{parent?.chipped}}" [(ngModel)]="chipped"></label>
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-12">
               <button type="submit" class="btn btn-primary">Spara</button>
-              <button type="button" class="btn btn-secondary">Avbryt</button>
+              <button type="button" (click)="abort()" class="btn btn-secondary">Avbryt</button>
             </div>
           </div>
         </section>

@@ -28,5 +28,4 @@ export class CatParentsIndexComponent implements OnInit {
       console.log(this.parents);
     });
   }
-
 }

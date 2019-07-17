@@ -2,13 +2,13 @@
   <div class="row">
     <div class="col-lg-4 offset-lg-4">
       <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)"  style="margin: 20px;">
-          <label>Email</label>
+          <label>Användarnamn</label>
           <input type="text" 
             class="form-control" 
             style="margin-bottom: 10px !important;"
-            id="email" 
-            name="email"
-            formControlName="email">
+            id="username" 
+            name="username"
+            formControlName="username">
             <label>Lösenord</label>
             <input type="password" 
             class="form-control" 

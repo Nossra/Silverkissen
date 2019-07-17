@@ -20,7 +20,7 @@ export class CatParentsCreateComponent implements OnInit {
     private catService: CatService,
     private router: Router) { 
       this.createForm = formBuilder.group({
-        'born' : [null, [Validators.required], null],
+        'birthdate' : [null, [Validators.required], null],
         'breed' : null,
         'color' : null,
         'name' : null,
@@ -28,7 +28,7 @@ export class CatParentsCreateComponent implements OnInit {
         'chipped' : null,
         'vaccinated' : null,
         'pedigree' : null,
-        'sex' : null
+        'sex' : [null, [Validators.required], null]
       });
     }
 
@@ -53,11 +53,15 @@ export class CatParentsCreateComponent implements OnInit {
 
   create(values: Cat) {
     values.parent = true;
-    values.images = this.images;
+    values.catImages = this.images;
     console.log(values)
     this.catService.create(values).subscribe(x => {
       this.router.navigate(['/admin',{outlets:{adminOutlet:'parents'}}])
     });
+  }
+
+  abort() {
+    this.router.navigate(['/admin',{outlets:{adminOutlet:'parents'}}])
   }
 
   ngOnInit() {

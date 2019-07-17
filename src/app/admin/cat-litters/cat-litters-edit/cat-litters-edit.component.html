@@ -9,7 +9,7 @@
   <div class="container">
     <div class="row" >
       <div class="col-md-12" rows="8">
-        <form [formGroup]="litterForm" (ngSubmit)="update(litterForm.value)">
+        <form [formGroup]="litterForm" (ngSubmit)="putUpdate(litterForm.value)">
           <section id="general" class="sections">
               <h4>Generellt</h4>
               <label>Anteckningar</label>
@@ -25,7 +25,7 @@
               </div>
               <div class="row" style="margin-top:20px;">
                 <div class="col-md-4 checkbox">
-                  <label>Vaccinerade <input type="checkbox" formControlName="vaccinated" value="{{litter?.vaccinated}}" [(ngModel)]="vaccinated" style="padding-top:5px;"></label>
+                  <label>Vaccinerade <input type="checkbox" formControlName="vaccinated" value="{{litter?.vaccinated}}" [(ngModel)]="vaccinated"></label>
                 </div>
                 <div class="col-md-4 checkbox">
                   <label>SVERAK <input type="checkbox" formControlName="pedigree" value="{{litter?.pedigree}}" [(ngModel)]="pedigree"></label>
@@ -34,7 +34,41 @@
                   <label>Chippade <input type="checkbox" formControlName="chipped" value="{{litter?.chipped}}" [(ngModel)]="chipped"></label>
                 </div>
               </div>
+              <div class="row">
+                <div class ="col-md-12">
+                  <label>Datum för leverans</label>
+                  <input type="date" formControlName="readyDate" value="{{litter?.formattedReadyDate}}" class="form-control">
+                </div>
+              </div>
+              <div class="row">
+                <div class ="col-md-12">
+                  <label>Födelsedatum</label>
+                  <input type="date" formControlName="birthDate" value="{{litter?.formattedBirthDate}}" class="form-control">
+                </div>
+              </div>
           </section>
+
+
+          <section id="status" class="sections">
+            <div class="row">
+              <div class="col-md-12">
+                <h4>Kullens status</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 radio">
+                <label><input type="radio" name="status" formControlName="status" value=1 [checked]="litter?.status === 1"> Aktiv</label>
+              </div>
+              <div class="col-md-4 radio">
+                <label><input type="radio" name="status" formControlName="status" value=0 [checked]="litter?.status === 0"> Arkiverad kull</label>
+              </div>
+              <div class="col-md-4 radio">
+                <label><input type="radio" name="status" formControlName="status" value=2 [checked]="litter?.status === 2"> Tidigare kull </label>
+              </div> 
+            </div>
+          </section>
+
+      
 
           <section id="kittens" class="sections">
               <div class="row">
@@ -71,14 +105,14 @@
                 </div>
             </section>
 
-            <section id="parents" class="sections">
+     <!--       <section id="parents" class="sections">
               <div class="row">
                   <div class="col-md-12">
                     <h4>Föräldrar</h4>
                     <div class="row">
                       <div class="col-12">
                         <!-- PARENTS TABLE -->
-                        <table class="table">
+        <!--                <table class="table">
                             <thead class="table-head">
                               <tr>
                                 <th scope="col">Namn</th>
@@ -94,38 +128,19 @@
 <!--                       <div class="col-4">
                         <button type="button" data-toggle="modal" data-target="#parentModal" class="btn btn-primary form-control">Ändra</button>
                       </div> -->
-                    </div>
+  <!--                  </div>
                   </div>
                 </div>
-            </section>
+            </section> -->
 
-            <section id="status" class="sections">
-                <div class="row">
-                  <div class="col-md-12">
-                    <h4>Kullens status</h4>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4 radio">
-                    <label><input type="radio" name="status" formControlName="status" value="Aktiv" [checked]="litter?.status === 'Aktiv'"> Aktiv</label>
-                  </div>
-                  <div class="col-md-4 radio">
-                    <label><input type="radio" name="status" formControlName="status" value="Arkiverad" [checked]="litter?.status === 'Arkiverad'"> Arkiverad kull</label>
-                  </div>
-                  <div class="col-md-4 radio">
-                    <label><input type="radio" name="status" formControlName="status" value="Tidigare kull" [checked]="litter?.status === 'Tidigare kull'"> Tidigare kull </label>
-                  </div> 
-                </div>
-              </section>
-
-            <section id="management" class="sections">
-              <div class="row">
-                  <div class="col-sm-6 offset-6">
-                    <button type="submit" class="btn btn-success" [disabled]="litterForm.pristine">Uppdatera</button>
-                    <button type="button" class="btn btn-primary">Tillbaka</button>
-                  </div>
-                </div>
-            </section>
+     <section id="management" class="sections">
+          <div class="row">
+              <div class="col-sm-12">
+                <button type="submit" class="btn btn-success" [disabled]="litterForm.pristine">Uppdatera</button>
+                <button type="button" (click)="abort()" class="btn btn-primary">Tillbaka</button>
+              </div>
+            </div>
+        </section>
 
           </form>
         </div>
@@ -180,7 +195,7 @@
                                         <div class="row">
                                           <div class="col-sm-12">
                                             <button type="submit" class="btn btn-primary">Spara</button>
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Avbryt</button>
+                                            <button type="button" name="kittenModal" class="btn btn-secondary" data-dismiss="modal">Avbryt</button>
                                           </div>
                                         </div>
                                       </form>

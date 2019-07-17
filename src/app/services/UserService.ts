@@ -14,8 +14,10 @@ export class UserService {
         private jwtHelper: JwtHelperService,
         /* private authGuardService: AuthGuardService */) {
     }
+
+    private testUrl:string = "https://localhost:44381/api/users"
     public get authenticated(): boolean {
-        const token = this.jwtHelper.tokenGetter();
+        const token = this.jwtHelper.tokenGetter();   
         if (token) {    
             return !this.jwtHelper.isTokenExpired(token);
         } else {
@@ -23,9 +25,9 @@ export class UserService {
         }
     }
 
-    public login(values:any) {
-        return this.http.post("api.silverkissen.se/silverkissen/api/user", values).subscribe((x: TokenObject) => {
-            localStorage.setItem('token', x.token);
+    public login(values:any) { 
+        return this.http.post(this.testUrl, values).subscribe((x: TokenObject) => {  
+            localStorage.setItem('token', x.token); 
             this.token = x.token;
             this.router.navigate(['admin']);
         });
@@ -35,7 +37,7 @@ export class UserService {
         'Content-Type':'application/json', 'Authorization':  'Bearer ' + localStorage.getItem("token")
     }
 
-    set token(val: string) {
+    set token(val: string) { 
         this.header.Authorization = 'Bearer ' + val;
     }
 }

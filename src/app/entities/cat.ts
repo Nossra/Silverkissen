@@ -1,8 +1,7 @@
 import { Image } from "./image";
 
 export class Cat {
-    public id:number;
-    public isWonderful: boolean = true;
+    public id:number; 
     public sex:string;
     public name:string;
     public breed:string;
@@ -13,9 +12,11 @@ export class Cat {
     public chipped:boolean;
     public notes:string;
     public parent:boolean;
-    public born:Date;
-    public images:Array<Image>
+    public birthdate:Date;
+    public formattedBirthDate:string;
+    public catImages:Array<Image>
+    public catLitterId:number;
     constructor() {
-        this.images = [];
+        this.catImages = [];
     }
 }
