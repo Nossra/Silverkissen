@@ -17,12 +17,12 @@ import { CatParentsEditComponent } from './admin/cat-parents/cat-parents-edit/ca
 import { CatParentsCreateComponent } from './admin/cat-parents/cat-parents-create/cat-parents-create.component';
 
 const routes: Routes = [
-   { path: '', pathMatch:'full', component: AboutComponent }, 
-  { path: 'login', component: LoginComponent },
-  { path: 'tidigare-kullar', component: EarlierLittersComponent },
-  { path: 'planerade-kullar', component: PlannedLittersComponent },
-  { path: 'kattungar', component: IndexLitterComponent },
-  { path: 'kattungar/:id', component: ReadmoreLitterComponent },
+  { path: '', pathMatch:'full', component: LoginComponent }, 
+  // { path: 'login', component: LoginComponent },
+  // { path: 'tidigare-kullar', component: EarlierLittersComponent },
+  // { path: 'planerade-kullar', component: PlannedLittersComponent },
+  // { path: 'kattungar', component: IndexLitterComponent },
+  // { path: 'kattungar/:id', component: ReadmoreLitterComponent },
   { path: 'admin', component: AdminIndexComponent, canActivate: [AuthGuardService] ,children:[
     { path: 'litters/:id', component: CatLittersEditComponent, canActivate: [AuthGuardService], outlet: 'adminOutlet'},
     { path: 'litters', component: CatLittersIndexComponent, canActivate: [AuthGuardService], outlet: 'adminOutlet' },

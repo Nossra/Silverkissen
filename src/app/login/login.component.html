@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-4 offset-lg-4">
-      <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)"  style="margin: 20px;">
+    <div class="col-lg-4 offset-lg-4" style="margin-top:20%">
+      <h1>Silverkissen Admin</h1>
+      <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)"  style="margin: 20px; margin-left:0px;">
           <label>Användarnamn</label>
           <input type="text" 
             class="form-control" 
@@ -16,12 +17,18 @@
             id="password" 
             name="password"
             formControlName="password">
-          <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Logga in</button>
+          <button type="submit" class="btn btn-info" style="margin-top:10px;" [disabled]="!loginForm.valid">Logga in</button>
           <span class="warning" 
           *ngIf="statusCode == 401">
             Incorrect username or password.
         </span>
       </form>
-     </div>
+      <div class="icon-attribute">
+       Icons made by 
+       <a href="https://www.freepik.com/?__hstc=57440181.df72cbbd917fa3bafd274d34c833ef18.1563407361784.1563407361784.1563407361784.1&__hssc=57440181.3.1563407361785&__hsfp=3232041946" 
+          title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"                 
+          title="Flaticon">www.flaticon.com</a>
+      </div>
+     </div> 
   </div>
 </div>

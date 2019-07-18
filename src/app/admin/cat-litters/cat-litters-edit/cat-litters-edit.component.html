@@ -1,14 +1,16 @@
 <section>
-  <div class="row">
+<div class="container">
+    <div class="row">
     <div class="col-md-12">
       <h1>Editera kull</h1>
     </div>
   </div>
+</div>
 </section>
 
   <div class="container">
     <div class="row" >
-      <div class="col-md-12" rows="8">
+      <div class="col-md-8" >
         <form [formGroup]="litterForm" (ngSubmit)="putUpdate(litterForm.value)">
           <section id="general" class="sections">
               <h4>Generellt</h4>
@@ -91,7 +93,7 @@
                               <td ng-repeat="kitten in litter?.kittens">{{ kitten.name != undefined ? kitten.name : '(Ej angett)' }}</td>
                               <td>{{ kitten.sex != undefined ? kitten.sex : '(Ej angett)' }}</td>
                               <td>{{ kitten.color != undefined ? kitten.color : '(Ej angett)' }}</td>
-                              <td><button type="button" data-toggle="modal" [attr.data-target]="'#kitten' + kitten.id" class="btn btn-primary">Ändra</button></td>
+                              <td><button type="button" data-toggle="modal" [attr.data-target]="'#kitten' + kitten.id" class="btn btn-info">Ändra</button></td>
                             </tr>
                           </tbody>
                         </table>
@@ -136,8 +138,8 @@
      <section id="management" class="sections">
           <div class="row">
               <div class="col-sm-12">
-                <button type="submit" class="btn btn-success" [disabled]="litterForm.pristine">Uppdatera</button>
-                <button type="button" (click)="abort()" class="btn btn-primary">Tillbaka</button>
+                <button type="submit" class="btn btn-info" [disabled]="litterForm.pristine">Uppdatera</button>
+                <button type="button" (click)="abort()" class="btn btn-secondary">Tillbaka</button>
               </div>
             </div>
         </section>
@@ -194,7 +196,7 @@
                                         </div>
                                         <div class="row">
                                           <div class="col-sm-12">
-                                            <button type="submit" class="btn btn-primary">Spara</button>
+                                            <button type="submit" class="btn btn-info">Spara</button>
                                             <button type="button" name="kittenModal" class="btn btn-secondary" data-dismiss="modal">Avbryt</button>
                                           </div>
                                         </div>
