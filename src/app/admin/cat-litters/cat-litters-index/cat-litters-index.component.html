@@ -1,72 +1,83 @@
 <section class="index-header">
-<div class="row">
-  <div class="col-sm-1">
-    <h3>Kullar</h3>
+  <div class="row">
+    <div class="col-sm-1">
+      <h3>Kullar</h3>
+    </div>
+    <div class="col-sm-11" style="padding-top:5px;">
+      <img src="../assets/images/add.png" style="height:auto; width:20px; margin-right:10px;cursor:pointer;" [routerLink]="['/admin',{outlets:{adminOutlet:'createlitter'}}]" > 
+      <img src="../assets/images/view.png"  style="height:auto; width:24px;cursor:pointer;" (click)="customize()">
+    </div> 
   </div>
-  <div class="col-sm-4">
-    <a [routerLink]="['/admin',{outlets:{adminOutlet:'createlitter'}}]" class="btn btn-info">Lägg till kull</a>
-  </div>
-</div>
 </section>
 
 
-<!-- <section *ngFor="let litter of litters" style="background-color:white; padding:10px; margin:10px;">
-  <div class="row">
-    <div class="col-md-2">
-      <img *ngFor="let image of litter?.images"src="{{image.value}}" alt="Kattungar" style="width:100%; height:auto; padding:5px;" class="img-responsive">
-    </div>
-    <div class="col-md-10">
-      <p [innerHTML]="litter.notes"></p>
-    </div>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-md-9">
-      <p><i>{{litter.status}}</i></p>
-    </div>
-    <div class="col-md-3">
-      <a class="btn btn-primary" [routerLink]="['/admin', {outlets: {adminOutlet:['litters', litter.id]}}]">Editera</a>
-      <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#litter' + litter.id">Ta bort</button>
-    </div>
-  </div>
-</section> -->
+<section id="litterRows" *ngIf="showCards == false">
 
-<section id="litters">
+  <div *ngFor="let litter of litters">
+    <div class="row">
+      <div class="col-md-8" style="background-color:white; padding:0px;margin-bottom:15px; height:120px;">
+        <div class="loader" *ngIf="loading"></div>
+        <div *ngIf="loading == false">
+          <div class="row">
+            <div class="col-md-2" style="padding-left:5.3%; padding-top:3.7%; width:auto; max-width:140px; height:120px;">
+                <img src="{{setStatusImage(litter)}}" style="height:auto;width:40%;">
+              </div>
+              <div class="col-md-2">
+                  <img src="{{litter.images[0].value}}" alt="Kattungar" style="width:auto; max-width:100%; height:120px;" class="img-responsive">  <!-- *ngFor="let image of litter?.images" -->    
+              </div>
+              <div class="col-md-6" style="padding-top:1%; overflow:hidden;max-height:100px;">
+                  <h4>
+                      {{ litter.parents.length == 0 ? 'Ingen förälder funnen'
+                        : litter.parents.length == 1 && litter.parents.length > 0 ? litter.parents[0].name
+                        : litter.parents[0].name + ' och ' + litter.parents[1].name }}
+                  </h4>
+                <p [innerHTML]="litter.notes"></p>
+              </div>
+              <div class="col-md-1 offset-md-1" style="margin-left:12%;padding-top:3.5%">
+                  <img src="../assets/images/edit.png" style="height:auto; width:30%; ;cursor:pointer;" [routerLink]="['/admin', {outlets: {adminOutlet:['litters', litter.id]}}]">
+                  <img src="../assets/images/delete.png" style="height:auto; width:30%;cursor:pointer;" data-toggle="modal" [attr.data-target]="'#litter' + litter.id"> 
+              </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+</section>
+ 
+<section id="litterCards"  *ngIf="showCards == true">
   <div *ngFor="let litter of litters" class="col-md-3 object">
     <div class="row">
-      <div class="col-md-12"> 
+        <div class="col-md-9"> 
+            <div class="row">
+              <div class="col-md-12">
+                <h5>Föräldrar</h5>  
+                <p>
+                  {{ litter.parents.length == 0 ? 'Ingen förälder funnen'
+                     : litter.parents.length == 1 && litter.parents.length > 0 ? litter.parents[0].name
+                     : litter.parents[0].name + ' och ' + litter.parents[1].name }}
+                  </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <h5>Födda:</h5><p>{{litter.formattedBirthDate}}</p>
+                <h5>Antal ungar:</h5> <p>{{litter.amountOfKids}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <h5>Status</h5>
+                <p>{{litter.statusText}}</p>
+              </div>
+            </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <h5>Föräldrar</h5>  
-        <p>
-          {{ litter.parents.length == 0 ? 'Ingen förälder funnen'
-             : litter.parents.length == 1 && litter.parents.length > 0 ? litter.parents[0].name
-             : litter.parents[0].name + ' och ' + litter.parents[1].name }}
-          </p>
+      <div class="col-md-2 offset-1"> 
+          <img src="../assets/images/edit.png" style="height:auto; width:30%; margin-right:5px; cursor:pointer;" [routerLink]="['/admin', {outlets: {adminOutlet:['litters', litter.id]}}]">
+          <img src="../assets/images/delete.png" style="height:auto; width:30%;cursor:pointer;" data-toggle="modal" [attr.data-target]="'#litter' + litter.id"> 
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <h5>Födda:</h5><p>{{litter.formattedBirthDate}}</p>
-        <h5>Antal ungar:</h5> <p>{{litter.amountOfKids}}</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <h5>Status</h5>
-        <p>{{litter.statusText}}</p>
-      </div>
-    </div>
-    <div class="row" style="margin-top:10px; margin-right:10px;">
-      <div class="col-sm-6">
-        <a class="btn btn-info" [routerLink]="['/admin', {outlets: {adminOutlet:['litters', litter.id]}}]">Editera</a>
-        <button type="button" class="btn btn-info" data-toggle="modal" [attr.data-target]="'#litter' + litter.id">Ta bort</button>
-      </div> 
     </div>
   </div>
-</section>
+</section> 
 
                              <div *ngFor="let litter of litters">
                               <div class="modal fade modalPosition" id="litter{{litter.id}}" role="dialog">
@@ -82,7 +93,7 @@
                                       <hr>
                                       <p>Denna kull kommer att tas  bort. Detta kan inte ångras.<br><br>Om du inte vill visa upp kullen kan du välja att arkivera den under <i>Editera</i></p>
                                       <button type="button" class="btn btn-info" data-dismiss="modal">Behåll kull</button>
-                                      <button type="button" class="btn btn-danger" (click)="delete(litter)">Ta bort kull</button>
+                                      <button type="button" class="btn btn-secondary" (click)="delete(litter)">Ta bort kull</button>
                                     </div>
                                   </div>
                                 </div>

@@ -39,7 +39,7 @@ export class CatLittersEditComponent implements OnInit {
         'pedigree' : null,
         'vaccinated' : null,
         'chipped' : null,
-        'displayPicture' : null,
+        'images' : null,
         'status' : null,
         'readyDate' : null,
         'birthDate' : null

@@ -17,6 +17,7 @@ import { Helpers } from './Helpers/helper';
 import { CatService } from './services/CatService';
 import { AuthGuardService } from './services/AuthGuard';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt'; 
+import { ImageService } from './services/ImageService';
 
 export function tokenGetterFn() {
   return localStorage.getItem('token');
@@ -46,6 +47,7 @@ export function tokenGetterFn() {
     UserService,
     CatService,
     Helpers,
+    ImageService,
     AuthGuardService
   ],
   bootstrap: [AppComponent]

@@ -8,6 +8,8 @@ import { LitterService } from '../../../services/litterService';
 import { Router } from '@angular/router';
 import { LitterStatus } from '../../../entities/LitterStatus';
 import { Litter_Parent } from '../../../entities/litter_parent';
+import { CatLitter_Image } from '../../../entities/catlitter_image';
+import { ImageService } from '../../../services/ImageService';
 
 @Component({
   selector: 'app-cat-litters-create',
@@ -27,6 +29,7 @@ export class CatLittersCreateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private catService: CatService,
     private litterService: LitterService,
+    private imageService: ImageService,
     private router: Router) { 
     this.createForm = formBuilder.group({
       'notes' : null,
@@ -39,6 +42,7 @@ export class CatLittersCreateComponent implements OnInit {
   }
 
   createLitter(values: any) {
+    console.log(this.images);
     let litter: Litter = new Litter();
     litter.birthDate = values.born;
     litter.amountOfKids = values.numberOfKittens;
@@ -54,11 +58,16 @@ export class CatLittersCreateComponent implements OnInit {
         )
       }
     }
-    if (this.images != undefined) {
-      litter.litterImages = this.images;
-    }
+
     litter.amountOfKids = values.numberOfKittens;
-    this.litterService.create(litter).subscribe(x => {
+    this.litterService.create(litter).subscribe(x => { 
+      if (this.images != undefined) {
+        for (let i = 0; i < this.images.length; i++) { 
+          this.imageService.PostImageToCatLitter(this.images[i]).subscribe(x => {
+            console.log(x);
+          })
+        }
+      }
       this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
     });
   }
@@ -76,7 +85,7 @@ export class CatLittersCreateComponent implements OnInit {
         let reader = new FileReader();
         reader.readAsDataURL(files[i]);
         reader.onload = () => {
-          let image:any = {
+          let image:Image = {
             filename: files[i].name,
             filetype: files[i].type,
             value: reader.result

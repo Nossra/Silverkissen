@@ -18,7 +18,7 @@ import { CatParentsCreateComponent } from './admin/cat-parents/cat-parents-creat
 
 const routes: Routes = [
   { path: '', pathMatch:'full', component: LoginComponent }, 
-  // { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   // { path: 'tidigare-kullar', component: EarlierLittersComponent },
   // { path: 'planerade-kullar', component: PlannedLittersComponent },
   // { path: 'kattungar', component: IndexLitterComponent },

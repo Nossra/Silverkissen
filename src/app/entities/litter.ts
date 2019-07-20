@@ -1,6 +1,7 @@
 import { Cat } from "./cat";
 import { LitterStatus } from "./LitterStatus";
 import { Litter_Parent } from "./litter_parent";
+import { Image } from "./image";
 
 export class Litter {
     public id:number; 
@@ -12,17 +13,16 @@ export class Litter {
     public vaccinated:boolean;
     public chipped:boolean;
     public sverak:boolean;
-    public readyDate: Date
-    public displayPicture:string|any;
-    public litterImages:Array<string|any>;
+    public readyDate: Date; 
+    public images:Array<Image>;
     public status: LitterStatus;
-    public formattedReadyDate:string;
+    public formattedReadyDate:string; 
     public formattedBirthDate:string;
     public statusText:string;
     public kittens:Array<Cat>;
     constructor() {
         this.parents = [];
-        this.litterImages = [];
+        this.images = [];
         this.kittens = [];
     }
 }
