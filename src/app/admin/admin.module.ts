@@ -5,6 +5,7 @@ import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import { CatLittersModule } from './cat-litters/cat-litters.module';
 import { CatParentsModule } from './cat-parents/cat-parents.module';
 import { OutletContext, RouterModule } from '@angular/router';
+import { AdminImagesComponent } from './admin-images/admin-images.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,7 @@ import { OutletContext, RouterModule } from '@angular/router';
     CatParentsModule,
     RouterModule
   ],
-  declarations: [AdminIndexComponent,AdminNavComponent]
+  declarations: [AdminIndexComponent,AdminNavComponent, AdminImagesComponent]
 })
 export class AdminModule { }
  

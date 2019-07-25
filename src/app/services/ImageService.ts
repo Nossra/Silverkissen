@@ -25,4 +25,14 @@ export class ImageService {
         let url = this.testUrl + "catlitters/"+ id;
         return this.http.get<Array<Image>>(url);
     }
+
+    public PostImageToExistingCatLitter(image:Image, id:number) : Observable<Image> {
+        let url = this.testUrl + "catlitters/"+ id;
+        return this.http.post<Image>(url,image);
+    }
+
+    public DeleteImage(id:number) : Observable<Image> {
+        let url = this.testUrl + "catlitters/"+ id;
+        return this.http.delete<Image>(url);
+    }
 }

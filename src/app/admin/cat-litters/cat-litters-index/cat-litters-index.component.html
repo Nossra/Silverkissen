@@ -12,18 +12,18 @@
 
 
 <section id="litterRows" *ngIf="showCards == false">
-
+  <div class="loader" *ngIf="loading"></div> 
   <div *ngFor="let litter of litters">
-    <div class="row">
-      <div class="col-md-8" style="background-color:white; padding:0px;margin-bottom:15px; height:120px;">
-        <div class="loader" *ngIf="loading"></div>
-        <div *ngIf="loading == false">
+    <div *ngIf="loading == false">
+      <div class="row">
+     
+        <div class="col-md-8" style="background-color:white; padding:0px;margin-bottom:15px; height:120px;">
           <div class="row">
             <div class="col-md-2" style="padding-left:5.3%; padding-top:3.7%; width:auto; max-width:140px; height:120px;">
                 <img src="{{setStatusImage(litter)}}" style="height:auto;width:40%;">
               </div>
-              <div class="col-md-2">
-                  <img src="{{litter.images[0].value}}" alt="Kattungar" style="width:auto; max-width:100%; height:120px;" class="img-responsive">  <!-- *ngFor="let image of litter?.images" -->    
+              <div class="col-md-2" >
+                <img *ngIf="litter.images.length > 0" src="{{litter.images[0].value}}" alt="Kattungar" style="width:auto; max-width:100%; height:120px;" class="img-responsive">  <!-- *ngFor="let image of litter?.images" -->    
               </div>
               <div class="col-md-6" style="padding-top:1%; overflow:hidden;max-height:100px;">
                   <h4>
@@ -73,7 +73,7 @@
       </div>
       <div class="col-md-2 offset-1"> 
           <img src="../assets/images/edit.png" style="height:auto; width:30%; margin-right:5px; cursor:pointer;" [routerLink]="['/admin', {outlets: {adminOutlet:['litters', litter.id]}}]">
-          <img src="../assets/images/delete.png" style="height:auto; width:30%;cursor:pointer;" data-toggle="modal" [attr.data-target]="'#litter' + litter.id"> 
+          <img src="../assets/images/delete.png" style="height:auto; width:30%;cursor:pointer;" data-toggle="modal" [attr.data-target]="'#litter' + litter.id">  
       </div>
     </div>
   </div>
@@ -81,8 +81,7 @@
 
                              <div *ngFor="let litter of litters">
                               <div class="modal fade modalPosition" id="litter{{litter.id}}" role="dialog">
-                                <div class="modal-dialog">
-                                  <!-- Modal content-->
+                                <div class="modal-dialog"> 
                                   <div class="modal-content">
                                     <div class="modal-header">
                                       <h4>Bekräfta borttagning av kull</h4>

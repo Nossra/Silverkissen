@@ -8,6 +8,7 @@ import { Cat } from '../../../entities/cat';
 import { CatService } from '../../../services/CatService';
 import { LitterStatus } from '../../../entities/LitterStatus';
 import { Helpers } from '../../../Helpers/helper';
+import { ImageService } from '../../../services/ImageService';
 
 @Component({
   selector: 'app-cat-litters-edit',
@@ -21,14 +22,18 @@ export class CatLittersEditComponent implements OnInit {
   private litterForm: FormGroup;
   private kittenForm: FormGroup;
   private parentsForm: FormGroup;
+  private imageForm: FormGroup;
   private vaccinated: boolean;
   private chipped: boolean;
   private pedigree: boolean;
+  private imagesToAdd: Array<Image> = [];
+  private loadedImages:boolean = false;
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(
     private litterService: LitterService,
     private catService: CatService,
+    private imageService: ImageService,
     private router: Router,
     private activatedRouter: ActivatedRoute,
     private formBuilder: FormBuilder) {
@@ -56,20 +61,30 @@ export class CatLittersEditComponent implements OnInit {
         'sex' : null,
         'color' : null
       });
+
+      this.imageForm = formBuilder.group({
+        'images' :null
+      });
     } 
 
     onFileChange(event) {
-      let reader = new FileReader();
+      this.imagesToAdd = [];
+      this.loadedImages = false;
       if(event.target.files && event.target.files.length > 0) {
-        let file = event.target.files[0];
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          this.litterForm.get('displayPicture').setValue({
-            filename: file.name,
-            filetype: file.type,
-            value: reader.result.split(',')[1]
-          })
-        };
+        let files = event.target.files;
+        for (let i = 0; i < files.length; i++) {
+          let reader = new FileReader();
+          reader.readAsDataURL(files[i]);
+          reader.onload = () => {
+            let image:Image = {
+              filename: files[i].name,
+              filetype: files[i].type,
+              value: reader.result
+            } 
+            this.imagesToAdd.push(image);
+            this.loadedImages = true;
+          }
+        }
       }
     }
 
@@ -81,8 +96,7 @@ export class CatLittersEditComponent implements OnInit {
       if (litter.status != null) this.litter.status = litter.status;
       if (litter.sverak != null) this.litter.sverak = litter.sverak;
       if (litter.readyDate != null) this.litter.readyDate = litter.readyDate;
-      if (litter.birthDate != null) this.litter.birthDate = litter.birthDate;
-      console.log(litter);
+      if (litter.birthDate != null) this.litter.birthDate = litter.birthDate; 
     this.litterService.putUpdate(this.litter).subscribe(x => {
       this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])  
     });
@@ -103,17 +117,21 @@ export class CatLittersEditComponent implements OnInit {
     this.catService.putUpdate(catToUpdate).subscribe(x => {
       window.location.reload();
     })
+  } 
+
+  addImages(value:any) { 
+    for (var i = 0; i < this.imagesToAdd.length; i++) {
+      this.imageService.PostImageToExistingCatLitter(this.imagesToAdd[i], this.litter.id).subscribe(x=> {
+        window.location.reload();
+      });
+    }
   }
 
-  closeKittenModal() {  
-
+  removeImage(id:number) {
+    this.imageService.DeleteImage(id).subscribe(x => {
+      window.location.reload();
+    });
   }
-
-  // updateKitten(kitten: Cat, id:number) { 
-  //   this.catService.update(kitten, id).subscribe(x => {
-  //     window.location.reload();
-  //   })
-  // }
 
   abort() {
     this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])

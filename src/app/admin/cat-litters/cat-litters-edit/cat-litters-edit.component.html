@@ -1,190 +1,166 @@
-<section>
-<div class="container">
+<section> 
     <div class="row">
     <div class="col-md-12">
       <h1>Editera kull</h1>
     </div>
-  </div>
-</div>
+  </div> 
 </section>
 
-
-
-
-
-
-  <div class="container">
-
-
-
-
-
-
-
-
-
-    <div class="row" >
-      <div class="col-md-8" >
-        <form [formGroup]="litterForm" (ngSubmit)="putUpdate(litterForm.value)">
-          <section id="general" class="sections">
-              <h4>Generellt</h4>
-              <label>Anteckningar</label>
-              <textarea formControlName="notes" value="{{litter?.notes}}" class="form-control"></textarea>
-              <div class="row" style="margin-top:20px;">
-                <div class="col-md-4 checkbox">
-                  <label>Vaccinerade <input type="checkbox" formControlName="vaccinated" value="{{litter?.vaccinated}}" [(ngModel)]="vaccinated"></label>
-                </div>
-                <div class="col-md-4 checkbox">
-                  <label>SVERAK <input type="checkbox" formControlName="pedigree" value="{{litter?.pedigree}}" [(ngModel)]="pedigree"></label>
-                </div>
-                <div class="col-md-4 checkbox">
-                  <label>Chippade <input type="checkbox" formControlName="chipped" value="{{litter?.chipped}}" [(ngModel)]="chipped"></label>
-                </div>
-              </div>
-              <div class="row">
-                <div class ="col-md-12">
-                  <label>Datum för leverans</label>
-                  <input type="date" formControlName="readyDate" value="{{litter?.formattedReadyDate}}" class="form-control">
-                </div>
-              </div>
-              <div class="row">
-                <div class ="col-md-12">
-                  <label>Födelsedatum</label>
-                  <input type="date" formControlName="birthDate" value="{{litter?.formattedBirthDate}}" class="form-control">
-                </div>
-              </div>
-          </section>
-
-
-          <!-- <section id="status" class="sections">
-            <div class="row">
-              <div class="col-md-12">
-                <h4>Kullens status</h4>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4 radio">
-                <label><input type="radio" name="status" formControlName="status" value=1 [checked]="litter?.status === 1"> Aktiv</label>
-              </div>
-              <div class="col-md-4 radio">
-                <label><input type="radio" name="status" formControlName="status" value=0 [checked]="litter?.status === 0"> Arkiverad kull</label>
-              </div>
-              <div class="col-md-4 radio">
-                <label><input type="radio" name="status" formControlName="status" value=2 [checked]="litter?.status === 2"> Tidigare kull </label>
-              </div> 
-            </div>
-          </section> -->
-
-          <section id="status" class="sections">
-              <div class="row">
-                <div class="col-md-12">
-                  <h4>Kullens status</h4>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4 radio">
-                  <label><input type="radio" name="status" formControlName="status" value=1 [checked]="litter?.status === 1"> Aktiv</label>
-                </div>
-                <div class="col-md-4 radio">
-                  <label><input type="radio" name="status" formControlName="status" value=0 [checked]="litter?.status === 0"> Arkiverad kull</label>
-                </div>
-                <div class="col-md-4 radio">
-                  <label><input type="radio" name="status" formControlName="status" value=2 [checked]="litter?.status === 2"> Tidigare kull </label>
-                </div> 
-              </div>
-            </section>
-
-      
-
-          <section id="kittens" class="sections">
-              <div class="row">
-                  <div class="col-md-12">
-                    <h4>Kattungar</h4>
-                    <div class="row">
-                      <div class="col-12">
-                        <!-- KITTEN TABLE -->
-                        <table class="table">
-                          <thead class="table-head">
-                            <tr>
-                              <th scope="col">Namn</th>
-                              <th scope="col">Kön</th>
-                              <th scope="col">Färg</th>
-                              <th scope="col"></th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let kitten of litter?.kittens">
-                              <td ng-repeat="kitten in litter?.kittens">{{ kitten.name != undefined ? kitten.name : '(Ej angett)' }}</td>
-                              <td>{{ kitten.sex != undefined ? kitten.sex : '(Ej angett)' }}</td>
-                              <td>{{ kitten.color != undefined ? kitten.color : '(Ej angett)' }}</td>
-                              <td><button type="button" data-toggle="modal" [attr.data-target]="'#kitten' + kitten.id" class="btn btn-info">Ändra</button></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                <!--       <div class="col-4" >
-                        <button type="button" data-toggle="modal" data-target="#kittenModal" class="btn btn-primary form-control">Ändra</button>
-                      </div> -->
-                    </div>
-                  <!--   <button type="button" class="btn btn-primary">Lägg till kattunge</button> -->
-                  </div>
-                </div>
-            </section>
-
  
 
-     <section id="management" class="sections">
-          <div class="row">
-              <div class="col-sm-12">
-                <button type="submit" class="btn btn-info" [disabled]="litterForm.pristine">Uppdatera</button>
-                <button type="button" (click)="abort()" class="btn btn-secondary">Tillbaka</button>
-              </div>
-            </div>
-        </section>
-
-          </form>
-        </div>
-
-
-
-
-
-
- 
-        <div class="col-md-3" >
-          <form [formGroup]="litterForm" (ngSubmit)="putUpdate(litterForm.value)">
-            <section id="general" class="sections">
-                <h4>Bilder</h4> 
-                <div class="row">
-                  <div class="col-md-12"> 
-  <!--                   <div *ngFor="let image of litter?.imageUrls">
-                      <img src="{{image.url}}" alt="{{image}}"class="img-responsive" style=" width:30%; height:auto;float:left; margin:5px;">
-                    </div> -->
-                    <input type="file" id="images" (change)="onFileChange($event)" #fileInput>
-                  </div>
-                </div>
-            </section>
-  
-  
-           
- 
-  
-            </form>
+<div class="row" >
+  <div class="col-md-5">
+    <form [formGroup]="litterForm" (ngSubmit)="putUpdate(litterForm.value)">
+        <h4>Generellt</h4>
+      <section id="general" class="sections">
+          <h5>Anteckningar</h5>
+          <textarea formControlName="notes" value="{{litter?.notes}}" class="form-control"></textarea>
+          <div class="row" style="margin-top:20px;"> 
+           <div class="col-md-12">
+              <table>
+                  <!-- <thead>
+                      <th>Vaccinerade</th>
+                      <th>Chippade</th>
+                      <th>Stamtavla</th>
+                  </thead>
+                  <tbody>
+                      <td><label>Vaccinerade <input type="checkbox" formControlName="vaccinated" value="{{litter?.vaccinated}}" [(ngModel)]="vaccinated"></label></td>
+                      <td><label>SVERAK <input type="checkbox" formControlName="pedigree" value="{{litter?.pedigree}}" [(ngModel)]="pedigree"></label></td>
+                      <td><label>Chippade <input type="checkbox" formControlName="chipped" value="{{litter?.chipped}}" [(ngModel)]="chipped"></label></td>
+                  </tbody> -->
+                  <tr>
+                    <label><td><input type="checkbox" formControlName="vaccinated" value="{{litter?.vaccinated}}" [(ngModel)]="vaccinated"></td><th>Vaccinerade</th></label>
+                  </tr>
+                  <tr>
+                    <label><td><input type="checkbox" formControlName="pedigree" value="{{litter?.pedigree}}" [(ngModel)]="pedigree"></td><th>Chippade</th></label>
+                  </tr>
+                  <tr>
+                    <label><td><input type="checkbox" formControlName="chipped" value="{{litter?.chipped}}" [(ngModel)]="chipped"></td> <th>Stamtavla</th></label>
+                  </tr>
+                </table>
+           </div>
           </div> 
+          <div class="row">
+            <div class ="col-md-12">
+              <h5>Datum för flytt</h5>
+              <input type="date" formControlName="readyDate" value="{{litter?.formattedReadyDate}}" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class ="col-md-12">
+              <h5>Födelsedatum</h5>
+              <input type="date" formControlName="birthDate" value="{{litter?.formattedBirthDate}}" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h5>Status</h5> 
+              <label><input type="radio" name="status" formControlName="status" value=1 [checked]="litter?.status === 1"> Aktiv</label> <br>
+              <label><input type="radio" name="status" formControlName="status" value=0 [checked]="litter?.status === 0"> Arkiverad kull</label> <br>
+              <label><input type="radio" name="status" formControlName="status" value=2 [checked]="litter?.status === 2"> Tidigare kull </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <button type="submit" class="btn btn-info" [disabled]="litterForm.pristine">Uppdatera</button>
+              <button type="button" (click)="abort()" class="btn btn-secondary">Tillbaka</button>
+            </div>
+          </div>
+      </section>
+    </form>
+    
+
+  
+
+   
+
+  <h4>Kattungar</h4>
+  <section id="kittens" class="sections">
+      <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-12">
+                <!-- KITTEN TABLE -->
+                <table class="table">
+                  <thead class="table-head">
+                    <tr>
+                      <th scope="col">Namn</th>
+                      <th scope="col">Kön</th>
+                      <th scope="col">Färg</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let kitten of litter?.kittens">
+                      <td ng-repeat="kitten in litter?.kittens">{{ kitten.name != undefined ? kitten.name : '(Ej angett)' }}</td>
+                      <td>{{ kitten.sex != undefined ? kitten.sex : '(Ej angett)' }}</td>
+                      <td>{{ kitten.color != undefined ? kitten.color : '(Ej angett)' }}</td>
+                      <td><button type="button" data-toggle="modal" [attr.data-target]="'#kitten' + kitten.id" class="btn btn-info">Ändra</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+        <!--       <div class="col-4" >
+                <button type="button" data-toggle="modal" data-target="#kittenModal" class="btn btn-primary form-control">Ändra</button>
+              </div> -->
+            </div>
+          <!--   <button type="button" class="btn btn-primary">Lägg till kattunge</button> -->
+          </div>
+        </div>
+    </section>
+
+
+</div>
+<div class="col-md-5">
+    <h4>Bilder</h4> 
+    <form [formGroup]="imageForm" (ngSubmit)="addImages(imageForm.value)">
+      <section id="general" class="image-sections"> 
+          <div class="row">
+            <div class="col-md-12"> 
+              <div *ngFor="let image of litter?.images">
+                <img src="{{image.value}}" 
+                     alt="{{image.filename}}"
+                     class="img-responsive"
+                     data-toggle="modal" 
+                     [attr.data-target]="'#image' + image.id" 
+                     style=" width:21%; height:auto;max-width:205px; max-height:250px;float:left; margin-right:5px; margin-bottom:5px;" >
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+                <label class="btn btn-info" style="margin-top:9px;"for="images">Lägg till</label>
+                <label *ngIf="loadedImages">{{this.imagesToAdd.length}} bilder</label>
+                <input type="file" id="images" style="display:none;" multiple (change)="onFileChange($event)" #fileInput> 
+                <button type="submit" class="btn btn-info">Ladda upp</button>
+            </div>
+          </div>
+      </section>
+      </form> 
+</div>
 
 
 
+</div> 
 
-
-
-
-
-    </div>
-
-    </div>
-
-
-
+<!-- IMAGE MODAL -->
+    <div *ngFor="let image of litter.images">
+      <div class="modal fade modalPosition" id="image{{image.id}}" role="dialog">
+        <div class="modal-dialog"> 
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4>Bekräfta borttagning av Bild {{image.filename}}</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body"> 
+              <button type="button" class="btn btn-info" data-dismiss="modal">Behåll</button>
+              <button type="button" class="btn btn-secondary" (click)="removeImage(image.id)">Ta bort</button>
+            </div>
+          </div>
+        </div>
+      </div>
+     </div>
 
 
 
@@ -196,62 +172,62 @@
 
 
                                           
-                             <!-- KITTENS MODAL -->
-                             <div *ngFor="let kitten of litter?.kittens">
-                              <div class="modal fade modalPosition" id="kitten{{kitten.id}}" role="dialog">
-                                <div class="modal-dialog">
-                                  <!-- Modal content-->
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h4>Styr upp {{kitten.name}}</h4>
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <form [formGroup]="kittenForm" (ngSubmit)="updateKitten(kittenForm.value, kitten.id)">
-                                        <div class="row">
-                                          <div class="col-sm-12">
-                                            <div >
-                                              <div class="row">
-                                                <div class="col-sm-2">
-                                                    <label class="modal-label">Namn</label>
-                                                </div>
-                                                <div class="col-sm-10">
-                                                  <input type="text" class="form-control" formControlName="name" value="{{kitten.name}}">
-                                                </div>
-                                              </div>
-                                              <div class="row">
-                                                <div class="col-sm-2">
-                                                  <label class="modal-label">Kön</label>
-                                                </div>
-                                                <div class="col-sm-10">
-                                                  <select formControlName="sex" class="form-control" value="{{kitten.sex}}">
-                                                    <option value="Hane">Hane</option>
-                                                    <option value="Hona">Hona</option>
-                                                  </select>
-                                                </div>
-                                              </div>
-                                              <div class="row">
-                                                <div class="col-sm-2">
-                                                  <label class="modal-label">Färg</label>
-                                                </div>
-                                                <div class="col-sm-10">
-                                                  <input type="text" class="form-control" formControlName="color" value="{{kitten.color}}">
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="row">
-                                          <div class="col-sm-12">
-                                            <button type="submit" class="btn btn-info">Spara</button>
-                                            <button type="button" name="kittenModal" class="btn btn-secondary" data-dismiss="modal">Avbryt</button>
-                                          </div>
-                                        </div>
-                                      </form>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                             </div>
+      <!-- KITTENS MODAL -->
+      <div *ngFor="let kitten of litter?.kittens">
+      <div class="modal fade modalPosition" id="kitten{{kitten.id}}" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4>Styr upp {{kitten.name}}</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="kittenForm" (ngSubmit)="updateKitten(kittenForm.value, kitten.id)">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div >
+                      <div class="row">
+                        <div class="col-sm-2">
+                            <label class="modal-label">Namn</label>
+                        </div>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" formControlName="name" value="{{kitten.name}}">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-2">
+                          <label class="modal-label">Kön</label>
+                        </div>
+                        <div class="col-sm-10">
+                          <select formControlName="sex" class="form-control" value="{{kitten.sex}}">
+                            <option value="Hane">Hane</option>
+                            <option value="Hona">Hona</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-2">
+                          <label class="modal-label">Färg</label>
+                        </div>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" formControlName="color" value="{{kitten.color}}">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <button type="submit" class="btn btn-info">Spara</button>
+                    <button type="button" name="kittenModal" class="btn btn-secondary" data-dismiss="modal">Avbryt</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
                             
 

@@ -7,7 +7,11 @@
 }
 
 .sections {
-    background-color: white; padding:10px;
+    background-color: white; padding:10px; margin-bottom:20px;
+}
+
+.image-section {
+    padding:10px; margin-bottom:20px;
 }
 
 input, textarea {
@@ -16,4 +20,4 @@ input, textarea {
 
 .modal-label {
     padding-top: 10px;
-} 
+}  

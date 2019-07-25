@@ -6,7 +6,7 @@ import { AdminNavComponent } from '../admin-nav/admin-nav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CatLittersEditComponent } from './cat-litters-edit/cat-litters-edit.component';
 import { RouterModule } from '@angular/router';
-import { CatLittersCreateComponent } from './cat-litters-create/cat-litters-create.component';
+import { CatLittersCreateComponent } from './cat-litters-create/cat-litters-create.component'; 
 
 @NgModule({
   imports: [

@@ -15,6 +15,7 @@ import { CatLittersCreateComponent } from './admin/cat-litters/cat-litters-creat
 import { AuthGuardService } from './services/AuthGuard';
 import { CatParentsEditComponent } from './admin/cat-parents/cat-parents-edit/cat-parents-edit.component';
 import { CatParentsCreateComponent } from './admin/cat-parents/cat-parents-create/cat-parents-create.component';
+import { AdminImagesComponent } from './admin/admin-images/admin-images.component'; 
 
 const routes: Routes = [
   { path: '', pathMatch:'full', component: LoginComponent }, 
@@ -30,6 +31,7 @@ const routes: Routes = [
     { path: 'parents', component: CatParentsIndexComponent, canActivate: [AuthGuardService], outlet: 'adminOutlet' },
     { path: 'parents/:id', component: CatParentsEditComponent, canActivate: [AuthGuardService], outlet: 'adminOutlet' },
     { path: 'createparent', component: CatParentsCreateComponent, canActivate: [AuthGuardService], outlet: 'adminOutlet' },
+    { path: 'images', component: AdminImagesComponent, canActivate: [AuthGuardService], outlet: 'adminOutlet' }, 
   ]}
 
 ];

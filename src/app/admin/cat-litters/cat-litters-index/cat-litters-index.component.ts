@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { Helpers } from '../../../Helpers/helper';
 import { Cat } from '../../../entities/cat';
 import { HtmlParser } from '@angular/compiler';
-import { ImageService } from '../../../services/ImageService';
+import { ImageService } from '../../../services/ImageService'; 
 
 @Component({
   selector: 'app-cat-litters-index',
@@ -21,7 +21,7 @@ export class CatLittersIndexComponent implements OnInit {
   private loading:boolean = true;
   constructor(
     private litterService: LitterService,
-    private imageService: ImageService,
+    private imageService: ImageService, 
     private router: Router) {
     }
 
@@ -29,7 +29,7 @@ export class CatLittersIndexComponent implements OnInit {
     this.litterService.delete(litter).subscribe(x => {
       window.location.reload();
     });
-  }
+  } 
 
   ngOnInit() {
     this.litterService.getAll().subscribe(x => { 
@@ -37,10 +37,11 @@ export class CatLittersIndexComponent implements OnInit {
       for (let litter of this.litters) {
         litter.formattedBirthDate = Helpers.dateHelper(new Date(litter.birthDate));
         litter.statusText = Helpers.statusHelper(litter.status);  
-        this.imageService.GetCatLitterImages(litter.id).subscribe(x => { 
-          litter.images = x;  
-          this.loading = false;
-        });
+        this.loading = false;
+        // this.imageService.GetCatLitterImages(litter.id).subscribe(x => { 
+        //   litter.images = x;  
+        //   this.loading = false;
+        // });
       }  
     });
   } 
