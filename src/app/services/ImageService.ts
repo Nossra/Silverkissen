@@ -15,24 +15,41 @@ export class ImageService {
         'Content-Type':'application/json', 'Authorization':  'Bearer ' + localStorage.getItem("token")
    }
    
+    //LITTERS
     public PostImageToCatLitter(image:Image) : Observable<Image> {
-        let url = this.testUrl + "catlitters"
-        console.log(url);
+        let url = this.testUrl + "catlitters" 
         return this.http.post<Image>(url, image)
     }
 
-    public GetCatLitterImages(id:number) : Observable<Array<Image>> {
-        let url = this.testUrl + "catlitters/"+ id;
-        return this.http.get<Array<Image>>(url);
-    }
+
+    // public GetCatLitterImages(id:number) : Observable<Array<Image>> {
+    //     let url = this.testUrl + "catlitters/"+ id;
+    //     return this.http.get<Array<Image>>(url);
+    // }
 
     public PostImageToExistingCatLitter(image:Image, id:number) : Observable<Image> {
         let url = this.testUrl + "catlitters/"+ id;
         return this.http.post<Image>(url,image);
     }
 
-    public DeleteImage(id:number) : Observable<Image> {
+    public DeleteLitterImage(id:number) : Observable<Image> {
         let url = this.testUrl + "catlitters/"+ id;
+        return this.http.delete<Image>(url);
+    }
+
+    //CATS
+    public PostImageToExistingCat(image:Image, id:number) : Observable<Image> {
+        let url = this.testUrl + "catimages/" + id 
+        return this.http.post<Image>(url, image)
+    }
+
+    public PostImageToCat(image:Image) : Observable<Image> {
+        let url = this.testUrl + "catimages/" 
+        return this.http.post<Image>(url, image)
+    }
+
+    public DeleteCatImage(id:number) : Observable<Image> {
+        let url = this.testUrl + "catimages/"+ id;
         return this.http.delete<Image>(url);
     }
 }

@@ -14,33 +14,44 @@
 <section id="litterRows" *ngIf="showCards == false">
   <div class="loader" *ngIf="loading"></div> 
   <div *ngFor="let litter of litters">
-    <div *ngIf="loading == false">
-      <div class="row">
-     
-        <div class="col-md-8" style="background-color:white; padding:0px;margin-bottom:15px; height:120px;">
-          <div class="row">
-            <div class="col-md-2" style="padding-left:5.3%; padding-top:3.7%; width:auto; max-width:140px; height:120px;">
-                <img src="{{setStatusImage(litter)}}" style="height:auto;width:40%;">
+    <div *ngIf="loading == false"> 
+    <div class="row">
+      <div class="col-md-8 row-item"> 
+        <div class="row"> 
+          <div class="col-md-12" > 
+            <div class="row"> 
+              <div class="col-md-11 row-edit" [routerLink]="['/admin', {outlets: {adminOutlet:['litters', litter.id]}}]">
+                <div class="row">
+                  <div class="col-md-2" class="row-status">
+                    <img src="{{setStatusImage(litter)}}" style="height:auto;width:40%;">
+                  </div>
+                  <div class="col-md-2">
+                    <img *ngIf="litter.images.length > 0" src="{{litter.images[0].value}}" alt="Kattungar" class="img-responsive row-image">  <!-- *ngFor="let image of litter?.images" -->    
+                  </div>
+                  <div class="col-md-6 row-notes">
+                    <h4>
+                        {{ litter.parents.length == 0 ? 'Ingen förälder funnen'
+                          : litter.parents.length == 1 && litter.parents.length > 0 ? litter.parents[0].name
+                          : litter.parents[0].name + ' och ' + litter.parents[1].name }}
+                    </h4>
+                    <p [innerHTML]="litter.notes"></p>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-2" >
-                <img *ngIf="litter.images.length > 0" src="{{litter.images[0].value}}" alt="Kattungar" style="width:auto; max-width:100%; height:120px;" class="img-responsive">  <!-- *ngFor="let image of litter?.images" -->    
+              <div class="col-md-1 row-management">
+                  <img src="../assets/images/edit.png" class="row-management-item" [routerLink]="['/admin', {outlets: {adminOutlet:['litters', litter.id]}}]">
+                  <img src="../assets/images/delete.png" class="row-management-item" data-toggle="modal" [attr.data-target]="'#litter' + litter.id"> 
               </div>
-              <div class="col-md-6" style="padding-top:1%; overflow:hidden;max-height:100px;">
-                  <h4>
-                      {{ litter.parents.length == 0 ? 'Ingen förälder funnen'
-                        : litter.parents.length == 1 && litter.parents.length > 0 ? litter.parents[0].name
-                        : litter.parents[0].name + ' och ' + litter.parents[1].name }}
-                  </h4>
-                <p [innerHTML]="litter.notes"></p>
-              </div>
-              <div class="col-md-1 offset-md-1" style="margin-left:12%;padding-top:3.5%">
-                  <img src="../assets/images/edit.png" style="height:auto; width:30%; ;cursor:pointer;" [routerLink]="['/admin', {outlets: {adminOutlet:['litters', litter.id]}}]">
-                  <img src="../assets/images/delete.png" style="height:auto; width:30%;cursor:pointer;" data-toggle="modal" [attr.data-target]="'#litter' + litter.id"> 
-              </div>
-          </div>
-        </div>
+            </div>
+ 
+            </div>
+
+         </div> 
+       </div>
+
       </div>  
     </div>
+
   </div>
 </section>
  

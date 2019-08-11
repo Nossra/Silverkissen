@@ -17,12 +17,13 @@ import { ImageService } from '../../../services/ImageService';
   styleUrls: ['./cat-litters-create.component.css']
 })
 export class CatLittersCreateComponent implements OnInit {
-  public createForm : FormGroup
-  public images: Array<Image> = [];
+  public createForm : FormGroup 
   public parents: Array<Cat> = [];
   public moms: Array<Cat> = [];
   public dads: Array<Cat> = [];
   private bogusLitterId:number = 1; //.Net ore EF finds the real id automatically in the api.
+  private imagesToAdd: Array<Image> = [];
+  private loadedImages: boolean = false;
   @ViewChild('fileInput') fileInput: ElementRef;
   
   constructor(
@@ -42,12 +43,12 @@ export class CatLittersCreateComponent implements OnInit {
   }
 
   createLitter(values: any) {
-    console.log(this.images);
     let litter: Litter = new Litter();
     litter.birthDate = values.born;
     litter.amountOfKids = values.numberOfKittens;
     litter.notes = values.notes;
     litter.status = LitterStatus.ACTIVE
+    litter.images = this.imagesToAdd;
     for (let parent of this.parents) {
       if (parent.id == values.dad || parent.id == values.mom) {
         litter.parents.push(
@@ -61,13 +62,14 @@ export class CatLittersCreateComponent implements OnInit {
 
     litter.amountOfKids = values.numberOfKittens;
     this.litterService.create(litter).subscribe(x => { 
-      if (this.images != undefined) {
-        for (let i = 0; i < this.images.length; i++) { 
-          this.imageService.PostImageToCatLitter(this.images[i]).subscribe(x => {
-            console.log(x);
-          })
-        }
-      }
+      // Secondary way of adding the images. Uses imageservice that posts to the latest litter that was added.
+      // if (this.images != undefined) {
+      //   for (let i = 0; i < this.images.length; i++) { 
+      //     this.imageService.PostImageToCatLitter(this.images[i]).subscribe(x => {
+      //       console.log(x);
+      //     })
+      //   }
+      // }
       this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
     });
   }
@@ -78,7 +80,8 @@ export class CatLittersCreateComponent implements OnInit {
 
   
   onFileChange(event) {
-    this.images = [];
+    this.imagesToAdd = [];
+    this.loadedImages = false;
     if(event.target.files && event.target.files.length > 0) {
       let files = event.target.files;
       for (let i = 0; i < files.length; i++) {
@@ -90,7 +93,8 @@ export class CatLittersCreateComponent implements OnInit {
             filetype: files[i].type,
             value: reader.result
           } 
-          this.images.push(image);
+          this.imagesToAdd.push(image);
+          this.loadedImages = true;
         }
       }
     }

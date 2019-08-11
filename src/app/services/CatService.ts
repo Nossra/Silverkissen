@@ -72,8 +72,7 @@ export class CatService {
         return this.http.get<Cat>(url);
     }
 
-    public create(cat: Cat) : Observable<Cat> {  
-        console.log(cat);
+    public create(cat: Cat) : Observable<Cat> {   
         cat.pedigree = Helpers.booleanHelperForCheckBoxes(cat.pedigree);
         cat.chipped = Helpers.booleanHelperForCheckBoxes(cat.chipped);
         cat.vaccinated = Helpers.booleanHelperForCheckBoxes(cat.vaccinated);

@@ -7,20 +7,16 @@
 </section>
 
 
-<div class="container">
+<div class="row">
+  <div class="col-md-5">
   <form [formGroup]="createForm" (ngSubmit)="createLitter(createForm.value)">
     <section class="sections">
       <h4>Generellt</h4>
       <label>Anteckningar</label>
       <textarea formControlName="notes" class="form-control"></textarea>
+   
       <div class="row">
         <div class="col-md-12">
-          <label>Bilder</label><br>
-          <input type="file" id="images" class="btn btn-primary" (change)="onFileChange($event)" #fileInput multiple>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
           <label>Antal katter</label>
           <input type="number" formControlName="numberOfKittens" class="form-control">
           <span style="color:red;"
@@ -28,8 +24,9 @@
               Antal ungar krävs..
           </span>
         </div>
-
-        <div class="col-md-6">
+      </div>
+      <div class="row">
+        <div class="col-md-12">
           <label>Födda</label>
           <input type="date" formControlName="born" class="form-control">
           <span style="color:red;"
@@ -39,6 +36,20 @@
         </div>
       </div>
     </section>
+
+    <section id="litter-images" class="sections">
+      <div class="row">
+          <div class="col-md-12"> 
+            <h4>Bilder</h4>
+            <!-- <input type="file" id="images" class="btn btn-primary" (change)="onFileChange($event)" #fileInput multiple> -->
+            <label class="btn btn-info" style="margin-top:9px;"for="images">Lägg till</label>
+            <label *ngIf="loadedImages">{{this.imagesToAdd.length}} bilder</label>
+            <input type="file" id="images" style="display:none;" multiple (change)="onFileChange($event)" #fileInput> 
+            <button type="submit" class="btn btn-info">Ladda upp</button>
+          </div> 
+        </div>
+    </section>
+
     <section id="parents" class="sections">
       <div class="row">
         <div class="col-md-12">
@@ -75,10 +86,11 @@
     <section id="management" class="sections">
       <div class="row">
         <div class="col-md-12">
-          <button type="submit" class="btn btn-success" [disabled]="createForm.pristine">Spara kull</button>
-          <button type="button" (click)="abort()" class="btn btn-primary">Tillbaka</button>
+          <button type="submit" class="btn btn-info" [disabled]="createForm.pristine">Spara kull</button>
+          <button type="button" (click)="abort()" class="btn btn-secondary">Tillbaka</button>
         </div>
       </div>
     </section>
   </form>
+  </div>
 </div>

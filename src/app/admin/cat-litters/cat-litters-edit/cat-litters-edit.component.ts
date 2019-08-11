@@ -28,6 +28,7 @@ export class CatLittersEditComponent implements OnInit {
   private pedigree: boolean;
   private imagesToAdd: Array<Image> = [];
   private loadedImages:boolean = false;
+  private loading:boolean = true;
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(
@@ -128,7 +129,7 @@ export class CatLittersEditComponent implements OnInit {
   }
 
   removeImage(id:number) {
-    this.imageService.DeleteImage(id).subscribe(x => {
+    this.imageService.DeleteLitterImage(id).subscribe(x => {
       window.location.reload();
     });
   }
@@ -149,7 +150,7 @@ export class CatLittersEditComponent implements OnInit {
       this.litter.formattedReadyDate = Helpers.dateHelper(new Date(x["readyDate"]));
       this.litter.statusText = Helpers.statusHelper(x["status"]);
       this.litter.formattedBirthDate = Helpers.dateHelper(new Date(x["birthDate"]));
-      console.log(this.litter);
+      this.loading = false;
     })
   } 
 }

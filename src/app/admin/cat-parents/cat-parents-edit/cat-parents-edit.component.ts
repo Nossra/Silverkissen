@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CatService } from '../../../services/CatService';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Helpers } from '../../../Helpers/helper';
+import { Image } from '../../../entities/image';
+import { ImageService } from '../../../services/ImageService';
 
 @Component({
   selector: 'app-cat-parents-edit',
@@ -12,15 +14,19 @@ import { Helpers } from '../../../Helpers/helper';
 })
 export class CatParentsEditComponent implements OnInit {
   
-  parent: Cat;
+  private parent: Cat;
   private parentId: number;
-  parentForm: FormGroup;
-  vaccinated:boolean;
-  pedigree:boolean;
-  chipped:boolean;
+  private parentForm: FormGroup;
+  private vaccinated:boolean;
+  private pedigree:boolean;
+  private chipped:boolean;
+  private imagesToAdd: Array<Image> = [];
+  private loadedImages:boolean = false;
+  private imageForm: FormGroup;
   constructor(
     private activatedRoute:ActivatedRoute,
     private catService: CatService,
+    private imageService: ImageService,
     private formBuilder: FormBuilder,
     private router:Router) { 
       this.parentForm = this.formBuilder.group({
@@ -34,6 +40,10 @@ export class CatParentsEditComponent implements OnInit {
         'color' : null,
         'sex' : null,
         'born' : null
+      });
+
+      this.imageForm = this.formBuilder.group({
+        'images':null
       });
     } 
 
@@ -53,6 +63,42 @@ export class CatParentsEditComponent implements OnInit {
     })
   }
 
+  onFileChange(event) {
+    this.imagesToAdd = [];
+    this.loadedImages = false;
+    if(event.target.files && event.target.files.length > 0) {
+      let files = event.target.files;
+      for (let i = 0; i < files.length; i++) {
+        let reader = new FileReader();
+        reader.readAsDataURL(files[i]);
+        reader.onload = () => {
+          let image:Image = {
+            filename: files[i].name,
+            filetype: files[i].type,
+            value: reader.result
+          } 
+          this.imagesToAdd.push(image);
+          this.loadedImages = true;
+        }
+      }
+    }
+  }
+
+  addImages(value:any) { 
+    console.log(this.imagesToAdd)
+    console.log(this.parentId)
+    for (var i = 0; i < this.imagesToAdd.length; i++) {
+      this.imageService.PostImageToExistingCat(this.imagesToAdd[i], this.parentId).subscribe(x=> {
+        window.location.reload();
+      });
+    }
+  }
+
+  removeImage(id:number) {
+    this.imageService.DeleteCatImage(id).subscribe(x => {
+      window.location.reload();
+    });
+  }
 
   abort() {
     this.router.navigate(['/admin',{outlets:{adminOutlet:'parents'}}])
@@ -67,9 +113,10 @@ export class CatParentsEditComponent implements OnInit {
       this.pedigree = x["pedigree"]
       this.vaccinated = x["vaccinated"];
       this.chipped = x["chipped"];
-      this.parent.formattedBirthDate = Helpers.dateHelper(new Date(x["birthDate"]));
+      this.parent.formattedBirthDate = Helpers.dateHelper(new Date(x["birthDate"])); 
       console.log(this.parent);
     });
+    
   }
 
 }

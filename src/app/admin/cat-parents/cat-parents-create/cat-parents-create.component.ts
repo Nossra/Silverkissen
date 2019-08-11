@@ -14,8 +14,8 @@ import { Image } from '../../../entities/image';
 export class CatParentsCreateComponent implements OnInit {
 
   @ViewChild('fileInput') fileInput: ElementRef;
-  createForm: FormGroup;
-  public images: Array<Image> = [];
+  private createForm: FormGroup;
+  private images: Array<Image> = [];
   constructor(private formBuilder: FormBuilder,
     private catService: CatService,
     private router: Router) { 
@@ -53,8 +53,7 @@ export class CatParentsCreateComponent implements OnInit {
 
   create(values: Cat) {
     values.parent = true;
-    values.catImages = this.images;
-    console.log(values)
+    values.Images = this.images; 
     this.catService.create(values).subscribe(x => {
       this.router.navigate(['/admin',{outlets:{adminOutlet:'parents'}}])
     });

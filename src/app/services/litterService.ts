@@ -40,8 +40,7 @@ export class LitterService {
         return this.http.put<Litter>(this.url+litter.id, litter);
     } 
 
-    public create(litter: Litter) : Observable<Litter> {
-        console.log(litter)
+    public create(litter: Litter) : Observable<Litter> { 
         return this.http.post<Litter>(this.url, litter);
     }
 

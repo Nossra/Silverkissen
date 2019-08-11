@@ -14,9 +14,9 @@ export class Cat {
     public parent:boolean;
     public birthdate:Date;
     public formattedBirthDate:string;
-    public catImages:Array<Image>
+    public Images:Array<Image>
     public catLitterId:number;
     constructor() {
-        this.catImages = [];
+        this.Images = [];
     }
 }

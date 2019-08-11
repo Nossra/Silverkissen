@@ -7,7 +7,8 @@
 </section>
 
 <section>
-  <div class="container">
+  <div class="row">
+    <div class="col-md-5">
     <form [formGroup]="createForm" (ngSubmit)="create(createForm.value)">
       <section class="sections">
 
@@ -82,11 +83,12 @@
       <section id="management" class="sections">
         <div class="row">
           <div class="col-md-12">
-            <button type="submit" class="btn btn-success" [disabled]="createForm.invalid">Spara kull</button>
-            <button type="button" (click)="abort()" class="btn btn-primary">Tillbaka</button>
+            <button type="submit" class="btn btn-info" [disabled]="createForm.invalid">Spara kull</button>
+            <button type="button" (click)="abort()" class="btn btn-secondary">Tillbaka</button>
           </div>
         </div>
       </section>
     </form>
   </div>
+</div>
 </section>
