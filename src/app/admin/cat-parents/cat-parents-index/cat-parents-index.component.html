@@ -2,26 +2,25 @@
   <div class="row">
       <div class="col-sm-1">
         <h3>Föräldrar</h3>
-      </div>
-      <div class="col-sm-11" style="padding-top:5px;">
         <img src="../assets/images/add.png" style="height:auto; width:20px; margin-right:10px;cursor:pointer;" [routerLink]="['/admin',{outlets:{adminOutlet:'createparent'}}]"> 
-      </div>
+      </div> 
     </div>
   </section>
 
   <section>
-      <div *ngFor="let parent of parents" class="col-sm-3 object">
+    <div *ngFor="let parent of parents" class="col-sm-3 object">
+      <div id="edit" [routerLink]="['/admin', {outlets: {adminOutlet:['parents', parent.id]}}]"> 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-sm-6">
             <h4>{{parent.name}}</h4>
           </div>
           <div class="col-sm-2 offset-4">  
-              <img src="../assets/images/edit.png" style="height:auto; width:30%; ;cursor:pointer;" [routerLink]="['/admin', {outlets: {adminOutlet:['parents', parent.id]}}]">
-              <img src="../assets/images/delete.png" style="height:auto; width:30%;cursor:pointer;" data-toggle="modal"  [attr.data-target]="'#parent' + parent.id"> 
+              <!-- <img src="../assets/images/edit.png" style="height:auto; width:10px; ;cursor:pointer;" [routerLink]="['/admin', {outlets: {adminOutlet:['parents', parent.id]}}]"> -->
+              <img src="../assets/images/delete.png" style="height:auto; width:10px;cursor:pointer;" data-toggle="modal"  [attr.data-target]="'#parent' + parent.id"> 
             </div>
         </div>
         <div class="row" *ngIf="parent.images.length > 0">
-          <div class="col-md-10">
+          <div class="col-sm-10">
             <img src="{{parent?.images[0].value}}" alt="katt" style="width:100%; height:auto;" class="img-responsive">
           </div>
         </div>
@@ -29,6 +28,7 @@
           
         </div>
       </div>
+    </div>
   </section>
 
 

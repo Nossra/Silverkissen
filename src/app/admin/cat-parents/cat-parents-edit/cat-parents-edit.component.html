@@ -64,7 +64,7 @@
         <section id="general" class="image-sections"> 
             <div class="row">
               <div class="col-md-12"> 
-                <div *ngFor="let image of parent?.images">
+                <div *ngFor="let image of parent?.Images">
                   <img src="{{image.value}}" 
                        alt="{{image.filename}}"
                        class="img-responsive"
@@ -92,7 +92,7 @@
 
 
 <!-- IMAGE MODAL -->
-<div *ngFor="let image of parent.images">
+<div *ngFor="let image of parent.Images">
   <div class="modal fade modalPosition" id="image{{image.id}}" role="dialog">
     <div class="modal-dialog"> 
       <!-- Modal content-->

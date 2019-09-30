@@ -17,27 +17,27 @@ import { ImageService } from '../../../services/ImageService';
 })
 export class CatLittersEditComponent implements OnInit {
 
-  private litter: Litter;
-  private litterID: number;
-  private litterForm: FormGroup;
-  private kittenForm: FormGroup;
-  private parentsForm: FormGroup;
-  private imageForm: FormGroup;
-  private vaccinated: boolean;
-  private chipped: boolean;
-  private pedigree: boolean;
-  private imagesToAdd: Array<Image> = [];
-  private loadedImages:boolean = false;
-  private loading:boolean = true;
+  public litter: Litter;
+  public litterID: number;
+  public litterForm: FormGroup;
+  public kittenForm: FormGroup;
+  public parentsForm: FormGroup;
+  public imageForm: FormGroup;
+  public vaccinated: boolean;
+  public chipped: boolean;
+  public pedigree: boolean;
+  public imagesToAdd: Array<Image> = [];
+  public loadedImages:boolean = false;
+  public loading:boolean = true;
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(
-    private litterService: LitterService,
-    private catService: CatService,
-    private imageService: ImageService,
-    private router: Router,
-    private activatedRouter: ActivatedRoute,
-    private formBuilder: FormBuilder) {
+    public litterService: LitterService,
+    public catService: CatService,
+    public imageService: ImageService,
+    public router: Router,
+    public activatedRouter: ActivatedRoute,
+    public formBuilder: FormBuilder) {
       this.litterForm = formBuilder.group({
         'notes' : null,
         'kittens' : null,

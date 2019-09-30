@@ -14,11 +14,11 @@ import { Image } from '../../../entities/image';
 export class CatParentsCreateComponent implements OnInit {
 
   @ViewChild('fileInput') fileInput: ElementRef;
-  private createForm: FormGroup;
-  private images: Array<Image> = [];
-  constructor(private formBuilder: FormBuilder,
-    private catService: CatService,
-    private router: Router) { 
+  public createForm: FormGroup;
+  public images: Array<Image> = [];
+  constructor(public formBuilder: FormBuilder,
+    public catService: CatService,
+    public router: Router) { 
       this.createForm = formBuilder.group({
         'birthdate' : [null, [Validators.required], null],
         'breed' : null,

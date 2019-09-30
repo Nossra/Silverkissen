@@ -12,8 +12,8 @@ export class CatParentsIndexComponent implements OnInit {
 
   parents: Array<Cat>;
   constructor(
-    private router:Router,
-    private catService: CatService
+    public router:Router,
+    public catService: CatService
   ) { }
 
   delete(parent: Cat) {

@@ -18,6 +18,7 @@ import { CatService } from './services/CatService';
 import { AuthGuardService } from './services/AuthGuard';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt'; 
 import { ImageService } from './services/ImageService';
+import { AboutComponent } from './about/about.component';
 
 export function tokenGetterFn() {
   return localStorage.getItem('token');
@@ -27,7 +28,8 @@ export function tokenGetterFn() {
   declarations: [
     AppComponent,
     NavComponent,
-    LoginComponent
+    LoginComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

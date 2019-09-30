@@ -14,15 +14,16 @@ import { ImageService } from '../../../services/ImageService';
   styleUrls: ['./cat-litters-index.component.css']
 })
 export class CatLittersIndexComponent implements OnInit {
-  private litters: Array<Litter>; 
-  private birthDates: Array<string> = new Array<string>();
-  private parentsArray: Array<Cat> = new Array<Cat>(); 
-  private showCards: boolean = false; 
-  private loading:boolean = true;
+  public litters: Array<Litter>; 
+  public birthDates: Array<string> = new Array<string>();
+  public parentsArray: Array<Cat> = new Array<Cat>(); 
+  public showCards: boolean = false; 
+  public loading:boolean = true;
+  public statusColor:string;
   constructor(
-    private litterService: LitterService,
-    private imageService: ImageService, 
-    private router: Router) {
+    public litterService: LitterService,
+    public imageService: ImageService, 
+    public router: Router) {
     }
 
   delete(litter:Litter) {
@@ -45,13 +46,15 @@ export class CatLittersIndexComponent implements OnInit {
       }  
     });
   } 
+
+
   
   customize() { 
     this.showCards = !this.showCards;
   }
-  setStatusImage(litter:Litter):string {
-    if (litter.status == 0) return "../assets/images/archived.png"
-    if (litter.status == 1) return "../assets/images/active.png"
-    if (litter.status == 2) return "../assets/images/earlier.png"
+  setStatusColor(litter:Litter):string {
+    if (litter.status == 0) return "#c52828"  //return "../assets/images/archived.png"
+    if (litter.status == 1) return "#11e646"  //return "../assets/images/active.png"
+    if (litter.status == 2) return "#3960cc"  //return "../assets/images/earlier.png"
   }
 }

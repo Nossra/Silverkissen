@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenObject } from "../entities/TokenObject";
+import { Observable } from "rxjs/Observable";
 /* import { AuthGuardService } from "./AuthGuard"; */
 
 @Injectable()
@@ -14,8 +15,9 @@ export class UserService {
         private jwtHelper: JwtHelperService,
         /* private authGuardService: AuthGuardService */) {
     }
-
-    private testUrl:string = "https://localhost:44381/api/users"
+    private prodUrl: string = "https://silverkissen20190617102007.azurewebsites.net/"
+    private testUrl:string = "https://localhost:44381/"
+    private url = this.prodUrl + "api/users";
     public get authenticated(): boolean {
         const token = this.jwtHelper.tokenGetter();   
         if (token) {    
@@ -25,8 +27,8 @@ export class UserService {
         }
     }
 
-    public login(values:any) { 
-        return this.http.post(this.testUrl, values).subscribe((x: TokenObject) => {  
+    public login(values:any)  { 
+        return this.http.post(this.url, values).subscribe((x: TokenObject) => {  
             localStorage.setItem('token', x.token); 
             this.token = x.token;
             this.router.navigate(['admin']);

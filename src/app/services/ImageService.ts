@@ -5,8 +5,10 @@ import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class ImageService {
-    private testUrl:string = "https://localhost:44381/api/images/";
-    
+    private testUrl:string = "https://localhost:44381/";
+    private prodUrl: string = "https://silverkissen20190617102007.azurewebsites.net/"
+
+    private url = this.prodUrl + "api/images/";
     constructor(private http: HttpClient) {
         
     }
@@ -17,7 +19,7 @@ export class ImageService {
    
     //LITTERS
     public PostImageToCatLitter(image:Image) : Observable<Image> {
-        let url = this.testUrl + "catlitters" 
+        let url = this.url + "catlitters" 
         return this.http.post<Image>(url, image)
     }
 
@@ -28,28 +30,28 @@ export class ImageService {
     // }
 
     public PostImageToExistingCatLitter(image:Image, id:number) : Observable<Image> {
-        let url = this.testUrl + "catlitters/"+ id;
+        let url = this.url + "catlitters/"+ id;
         return this.http.post<Image>(url,image);
     }
 
     public DeleteLitterImage(id:number) : Observable<Image> {
-        let url = this.testUrl + "catlitters/"+ id;
+        let url = this.url + "catlitters/"+ id;
         return this.http.delete<Image>(url);
     }
 
     //CATS
     public PostImageToExistingCat(image:Image, id:number) : Observable<Image> {
-        let url = this.testUrl + "catimages/" + id 
+        let url = this.url + "catimages/" + id 
         return this.http.post<Image>(url, image)
     }
 
     public PostImageToCat(image:Image) : Observable<Image> {
-        let url = this.testUrl + "catimages/" 
+        let url = this.url + "catimages/" 
         return this.http.post<Image>(url, image)
     }
 
     public DeleteCatImage(id:number) : Observable<Image> {
-        let url = this.testUrl + "catimages/"+ id;
+        let url = this.url + "catimages/"+ id;
         return this.http.delete<Image>(url);
     }
 }

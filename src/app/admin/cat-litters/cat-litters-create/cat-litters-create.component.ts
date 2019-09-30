@@ -21,17 +21,17 @@ export class CatLittersCreateComponent implements OnInit {
   public parents: Array<Cat> = [];
   public moms: Array<Cat> = [];
   public dads: Array<Cat> = [];
-  private bogusLitterId:number = 1; //.Net ore EF finds the real id automatically in the api.
-  private imagesToAdd: Array<Image> = [];
-  private loadedImages: boolean = false;
+  public bogusLitterId:number = 1; //.Net ore EF finds the real id automatically in the api.
+  public imagesToAdd: Array<Image> = [];
+  public loadedImages: boolean = false;
   @ViewChild('fileInput') fileInput: ElementRef;
   
   constructor(
-    private formBuilder: FormBuilder,
-    private catService: CatService,
-    private litterService: LitterService,
-    private imageService: ImageService,
-    private router: Router) { 
+    public formBuilder: FormBuilder,
+    public catService: CatService,
+    public litterService: LitterService,
+    public imageService: ImageService,
+    public router: Router) { 
     this.createForm = formBuilder.group({
       'notes' : null,
       'numberOfKittens' : [null, [Validators.required], null],

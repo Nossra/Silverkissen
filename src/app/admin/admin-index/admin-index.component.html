@@ -1,20 +1,46 @@
-<div id="top-bar">
-  <div class="row top-bar-fix">
-    <div class="col-md-12 top-bar-fix">
-      <h1>Silverkissen Admin</h1>
-    </div>
-  </div>
-</div>
-
-<div class="row" style="margin-right: 0px; margin-left: 0px;">
-  <div class=col-sm-1>
-      <app-admin-nav></app-admin-nav>
-  </div>
-  <div class="col-sm-11">
-    <div class="row">
-      <div class="col-sm-12" style="margin-top:10px;">
-        <router-outlet name="adminOutlet"></router-outlet>
+ <div id="background">
+ <!-- <div id="top-bar"> 
+    <div class="row top-bar-fix">
+      <div class="col-md-12 top-bar-fix">
+        <h1>Silverkissen Admin</h1>
+        <a [routerLink]="['/admin',{outlets:{adminOutlet:'litters'}}]" class="nav-link">kullar</a>
+        <a [routerLink]="['/admin',{outlets:{adminOutlet:'parents'}}]" class="nav-link">föräldrar</a>
+        <a [routerLink]="['/admin',{outlets:{adminOutlet:'images'}}]" class="nav-link">bilder</a>
       </div>
     </div>
+  </div> -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Silverkissen Adm</a> 
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a [routerLink]="['/admin',{outlets:{adminOutlet:'litters'}}]" class="nav-link">Kullar</a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/admin',{outlets:{adminOutlet:'parents'}}]" class="nav-link">Föräldrar</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li> -->
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="custom-container">
+      <div class="row" style="padding-right:0px;max-width:100%;">
+          <!-- <div class=col-md-2 >
+              <app-admin-nav></app-admin-nav>
+          </div> -->
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-12" style="margin-top:10px;">
+                <router-outlet name="adminOutlet"></router-outlet>
+              </div>
+            </div> 
+          </div>
+        </div> 
   </div>
-</div> 
+</div>

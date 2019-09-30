@@ -6,7 +6,9 @@ import { Helpers } from "../Helpers/helper";
 
 @Injectable()
 export class CatService {
-    private testUrl:string = "https://localhost:44381/api/cats/";
+    private testUrl:string = "https://localhost:44381/";
+    private prodUrl: string = "https://silverkissen20190617102007.azurewebsites.net/" 
+    private url = this.prodUrl + "api/cats/";
     
     constructor(private http: HttpClient) {
         
@@ -59,16 +61,16 @@ export class CatService {
     // }
     
     public getParents() : Observable<Array<Cat>> {
-        let parentsUrl = this.testUrl+'parents';
+        let parentsUrl = this.url+'parents';
         return this.http.get<Array<Cat>>(parentsUrl);
     }
 
     public putUpdate(cat:Cat): Observable<Cat> {
-        return this.http.put<Cat>(this.testUrl+cat.id, cat)
+        return this.http.put<Cat>(this.url+cat.id, cat)
     }
 
     public findById(id: number) : Observable<Cat> {
-        let url = this.testUrl + id;
+        let url = this.url + id;
         return this.http.get<Cat>(url);
     }
 
@@ -76,11 +78,11 @@ export class CatService {
         cat.pedigree = Helpers.booleanHelperForCheckBoxes(cat.pedigree);
         cat.chipped = Helpers.booleanHelperForCheckBoxes(cat.chipped);
         cat.vaccinated = Helpers.booleanHelperForCheckBoxes(cat.vaccinated);
-        return this.http.post<Cat>(this.testUrl, cat);
+        return this.http.post<Cat>(this.url, cat);
     }
 
     public delete(cat: Cat) : Observable<Cat> {
-        let url = this.testUrl+cat.id;
+        let url = this.url+cat.id;
         return this.http.delete<Cat>(url);
     }
 }

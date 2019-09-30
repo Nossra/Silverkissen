@@ -14,21 +14,21 @@ import { ImageService } from '../../../services/ImageService';
 })
 export class CatParentsEditComponent implements OnInit {
   
-  private parent: Cat;
-  private parentId: number;
-  private parentForm: FormGroup;
-  private vaccinated:boolean;
-  private pedigree:boolean;
-  private chipped:boolean;
-  private imagesToAdd: Array<Image> = [];
-  private loadedImages:boolean = false;
-  private imageForm: FormGroup;
+  public parent: Cat;
+  public parentId: number;
+  public parentForm: FormGroup;
+  public vaccinated:boolean;
+  public pedigree:boolean;
+  public chipped:boolean;
+  public imagesToAdd: Array<Image> = [];
+  public loadedImages:boolean = false;
+  public imageForm: FormGroup;
   constructor(
-    private activatedRoute:ActivatedRoute,
-    private catService: CatService,
-    private imageService: ImageService,
-    private formBuilder: FormBuilder,
-    private router:Router) { 
+    public activatedRoute:ActivatedRoute,
+    public catService: CatService,
+    public imageService: ImageService,
+    public formBuilder: FormBuilder,
+    public router:Router) { 
       this.parentForm = this.formBuilder.group({
         'chipped' : null,
         'name' : null,
@@ -47,7 +47,7 @@ export class CatParentsEditComponent implements OnInit {
       });
     } 
 
-  putUpdate(cat:Cat, id:number) {  
+  putUpdate(cat:Cat) {  
     if (cat.name != null) this.parent.name = cat.name;
     if (cat.birthdate != null) this.parent.birthdate = cat.birthdate;
     if (cat.breed != null) this.parent.breed = cat.breed;
