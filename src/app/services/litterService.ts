@@ -7,7 +7,7 @@ import { Litter } from "../entities/litter";
 
 @Injectable()
 export class LitterService {
-    private prodUrl: string = "https://silverkissen20190617102007.azurewebsites.net/"
+    private prodUrl: string = "https://silverkissen20191220122823.azurewebsites.net/"
     private testUrl:string = "https://localhost:44381/";
     private url:string = this.prodUrl + "api/catlitters/";
     private activeLittersUrl:string = this.url + "active";

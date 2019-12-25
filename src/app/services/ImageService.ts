@@ -6,7 +6,7 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class ImageService {
     private testUrl:string = "https://localhost:44381/";
-    private prodUrl: string = "https://silverkissen20190617102007.azurewebsites.net/"
+    private prodUrl: string = "https://silverkissen20191220122823.azurewebsites.net/"
 
     private url = this.prodUrl + "api/images/";
     constructor(private http: HttpClient) {

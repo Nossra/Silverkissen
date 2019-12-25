@@ -7,7 +7,7 @@ import { Helpers } from "../Helpers/helper";
 @Injectable()
 export class CatService {
     private testUrl:string = "https://localhost:44381/";
-    private prodUrl: string = "https://silverkissen20190617102007.azurewebsites.net/" 
+    private prodUrl: string = "https://silverkissen20191220122823.azurewebsites.net/" 
     private url = this.prodUrl + "api/cats/";
     
     constructor(private http: HttpClient) {

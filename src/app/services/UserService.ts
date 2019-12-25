@@ -15,7 +15,7 @@ export class UserService {
         private jwtHelper: JwtHelperService,
         /* private authGuardService: AuthGuardService */) {
     }
-    private prodUrl: string = "https://silverkissen20190617102007.azurewebsites.net/"
+    private prodUrl: string = "https://silverkissen20191220122823.azurewebsites.net/"
     private testUrl:string = "https://localhost:44381/"
     private url = this.prodUrl + "api/users";
     public get authenticated(): boolean {
