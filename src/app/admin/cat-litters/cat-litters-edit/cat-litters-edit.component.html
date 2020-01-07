@@ -102,32 +102,67 @@
 
 
 </div>
+
+
+
 <div class="col-md-5">
-    <h4>Bilder</h4> 
-    <form [formGroup]="imageForm" (ngSubmit)="addImages(imageForm.value)">
-      <section id="general" class="image-sections"> 
-          <div class="row">
-            <div class="col-md-12"> 
-              <div *ngFor="let image of litter?.images">
-                <img src="{{image.value}}" 
-                     alt="{{image.filename}}"
-                     class="img-responsive"
-                     data-toggle="modal" 
-                     [attr.data-target]="'#image' + image.id" 
-                     style=" width:21%; height:auto;max-width:205px; max-height:250px;float:left; margin-right:5px; margin-bottom:5px;" >
+    <h4>Profilbild</h4> 
+    <div>
+      <form [formGroup]="displayPictureImageForm" (ngSubmit)="addImages(displayPictureImageForm.value)">
+          <section id="general" class="image-sections"> 
+              <div class="row">
+                <div class="col-md-12"> 
+                  <div *ngFor="let image of litter?.images"> 
+                    <img  *ngIf="image.displayPicture == true"
+                          src="{{image.value}}" 
+                          alt="{{image.filename}}"
+                          class="img-responsive img-style"
+                          data-toggle="modal" 
+                          [attr.data-target]="'#image' + image.id"  >
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-                <label class="btn btn-info" style="margin-top:9px;"for="images">Lägg till</label>
-                <label *ngIf="loadedImages">{{this.imagesToAdd.length}} bilder</label>
-                <input type="file" id="images" style="display:none;" multiple (change)="onFileChange($event)" #fileInput> 
-                <button type="submit" class="btn btn-info">Ladda upp</button>
-            </div>
-          </div>
-      </section>
-      </form> 
+              <div class="row">
+                <div class="col-md-12">
+                    <label class="btn btn-info" style="margin-top:9px;"for="displaypicture">Lägg till</label> 
+                    <img *ngIf="loadedDisplayPicture" src="{{this.displayPicture.value}}" class="img-style"> 
+                    <input type="file" id="displaypicture" style="display:none;" (change)="onFileChangeDisplayPicture($event)" #fileInputDisplayPicture> 
+                    <button type="submit" class="btn btn-info">Ladda upp</button>
+                </div> 
+              </div>
+          </section>
+        </form> 
+    </div>
+    <h4>Bilder</h4> 
+    <div>
+      <form [formGroup]="imageForm" (ngSubmit)="addImages(imageForm.value)">
+          <section id="general" class="image-sections"> 
+              <div class="row">
+                <div class="col-md-12"> 
+                  <div *ngFor="let image of litter?.images"> 
+                    <img 
+                        *ngIf="image.displayPicture == false"
+                        src="{{image.value}}" 
+                        alt="{{image.filename}}"
+                        class="img-responsive img-style"
+                        data-toggle="modal" 
+                        [attr.data-target]="'#image' + image.id" >
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <label class="btn btn-info" style="margin-top:9px;"for="images">Lägg till</label> 
+                    <input type="file" id="images" style="display:none;" multiple (change)="onFileChange($event)" #fileInput> 
+                    <button type="submit" class="btn btn-info">Ladda upp</button>
+                    <div *ngFor="let image of this.imagesToAdd">
+                        <img *ngIf="loadedImages" src="{{this.image.value}}" class="img-style"> 
+                    </div>
+                </div>
+              </div>
+            </section>
+          </form> 
+    </div> 
 </div>
 
 

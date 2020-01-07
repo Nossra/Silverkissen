@@ -6,106 +6,145 @@
   </div>
 </section>
 
-<section id="parentForm">
-  <div class="row">
-    <div class="col-md-5">
-      <form [formGroup]="parentForm" (ngSubmit)="putUpdate(parentForm.value)">
-        <section id="general" class="sections">
+<div class="loader" *ngIf="loading"></div> 
+<div *ngIf="loading == false">
 
-          <div class="row">
-            <div class="col-md-12">
-              <h5>Namn</h5>
-              <input type="input" class="form-control" value="{{parent?.name}}" formControlName="name">
-              <h5>Anteckningar</h5>
-              <textarea class="form-control" value="{{parent?.notes}}" formControlName="notes"></textarea>
-              <label>Kön</label>
-              <select type="input" class="form-control" value="{{parent?.sex}}" formControlName="sex">
-                <option value="Hane">Hane</option>
-                <option value="Hona">Hona</option>
-              </select>
-              <h5>Ras</h5>
-              <input type="input" class="form-control" value="{{parent?.breed}}" formControlName="breed">
-              <h5>Färg</h5>
-              <input type="input" class="form-control" value="{{parent?.color}}" formControlName="color">
-              <h5>Födelsedatum</h5>
-              <input type="date" class="form-control" value="{{parent?.formattedBirthDate}}" formControlName="born">
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-12">
-              <table> 
-                <tr>
-                  <label><td><input type="checkbox" formControlName="vaccinated" value="{{parent?.vaccinated}}" [(ngModel)]="vaccinated"></td><th>Vaccinerad</th></label>
-                </tr>
-                <tr>
-                  <label><td><input type="checkbox" formControlName="pedigree" value="{{parent?.pedigree}}" [(ngModel)]="pedigree"></td><th>Chippad</th></label>
-                </tr>
-                <tr>
-                  <label><td><input type="checkbox" formControlName="chipped" value="{{parent?.chipped}}" [(ngModel)]="chipped"></td> <th>Stamtavla</th></label>
-                </tr>
-              </table>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-12">
-              <button type="submit" class="btn btn-info">Spara</button>
-              <button type="button" (click)="abort()" class="btn btn-secondary">Avbryt</button>
-            </div>
-          </div>
-        </section>
-      </form>
-    </div>
-
-    <div class="col-md-5">
-      <h4>Bilder</h4> 
-      <form [formGroup]="imageForm" (ngSubmit)="addImages(imageForm.value)">
-        <section id="general" class="image-sections"> 
-            <div class="row">
-              <div class="col-md-12"> 
-                <div *ngFor="let image of parent?.Images">
-                  <img src="{{image.value}}" 
-                       alt="{{image.filename}}"
-                       class="img-responsive"
-                       data-toggle="modal" 
-                       [attr.data-target]="'#image' + image.id" 
-                       style=" width:21%; height:auto;max-width:205px; max-height:250px;float:left; margin-right:5px; margin-bottom:5px;" >
-                </div>
-              </div>
-            </div>
+  <section id="parentForm">
+    <div class="row">
+      <div class="col-md-5">
+        <form [formGroup]="parentForm" (ngSubmit)="putUpdate(parentForm.value)">
+          <section id="general" class="sections">
+  
             <div class="row">
               <div class="col-md-12">
-                  <label class="btn btn-info" style="margin-top:9px;"for="images">Lägg till</label>
-                  <label *ngIf="loadedImages">{{this.imagesToAdd.length}} bilder</label>
-                  <input type="file" id="images" style="display:none;" multiple (change)="onFileChange($event)" #fileInput> 
-                  <button type="submit" class="btn btn-info">Ladda upp</button>
+                <h5>Namn</h5>
+                <input type="input" class="form-control" value="{{parent?.name}}" formControlName="name">
+                <h5>Anteckningar</h5>
+                <textarea class="form-control" value="{{parent?.notes}}" formControlName="notes"></textarea>
+                <label>Kön</label>
+                <select type="input" class="form-control" value="{{parent?.sex}}" formControlName="sex">
+                  <option value="Hane">Hane</option>
+                  <option value="Hona">Hona</option>
+                </select>
+                <h5>Ras</h5>
+                <input type="input" class="form-control" value="{{parent?.breed}}" formControlName="breed">
+                <h5>Färg</h5>
+                <input type="input" class="form-control" value="{{parent?.color}}" formControlName="color">
+                <h5>Födelsedatum</h5>
+                <input type="date" class="form-control" value="{{parent?.formattedBirthDate}}" formControlName="born">
               </div>
             </div>
-        </section>
-        </form> 
-  </div>
-
- 
-  </div>
-</section>
-
-
-<!-- IMAGE MODAL -->
-<div *ngFor="let image of parent.Images">
-  <div class="modal fade modalPosition" id="image{{image.id}}" role="dialog">
-    <div class="modal-dialog"> 
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4>Bekräfta borttagning av Bild {{image.filename}}</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body"> 
-          <button type="button" class="btn btn-info" data-dismiss="modal">Behåll</button>
-          <button type="button" class="btn btn-secondary" (click)="removeImage(image.id)">Ta bort</button>
+  
+            <div class="row">
+              <div class="col-md-12">
+                <table> 
+                  <tr>
+                    <label><td><input type="checkbox" formControlName="vaccinated" value="{{parent?.vaccinated}}" [(ngModel)]="vaccinated"></td><th>Vaccinerad</th></label>
+                  </tr>
+                  <tr>
+                    <label><td><input type="checkbox" formControlName="pedigree" value="{{parent?.pedigree}}" [(ngModel)]="pedigree"></td><th>Chippad</th></label>
+                  </tr>
+                  <tr>
+                    <label><td><input type="checkbox" formControlName="chipped" value="{{parent?.chipped}}" [(ngModel)]="chipped"></td> <th>Stamtavla</th></label>
+                  </tr>
+                </table>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col-md-12">
+                <button type="submit" class="btn btn-info">Spara</button>
+                <button type="button" (click)="abort()" class="btn btn-secondary">Avbryt</button>
+              </div>
+            </div>
+          </section>
+        </form>
+      </div>
+  
+      <div class="col-md-5">
+          <h4>Profilbild</h4> 
+          <div>
+            <form [formGroup]="displayPictureImageForm" (ngSubmit)="addImages(displayPictureImageForm.value)">
+                <section id="general" class="image-sections"> 
+                    <div class="row">
+                      <div class="col-md-12"> 
+                        <div *ngFor="let image of parent?.images"> 
+                          <img  *ngIf="image.displayPicture == true"
+                                src="{{image.value}}" 
+                                alt="{{image.filename}}"
+                                class="img-responsive img-style"
+                                data-toggle="modal" 
+                                [attr.data-target]="'#image' + image.id"  >  
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                          <img *ngIf="loadedDisplayPicture" src="{{this.displayPicture.value}}" class="img-style"> 
+                          <label class="btn btn-info" style="margin-top:9px;"for="displaypicture">Lägg till</label> 
+                          <input type="file" id="displaypicture" style="display:none;" (change)="onFileChangeDisplayPicture($event)" #fileInputDisplayPicture> 
+                          <button type="submit" class="btn btn-info">Ladda upp</button>
+                      </div> 
+                    </div>
+                </section>
+              </form> 
+          </div>
+          <h4>Bilder</h4> 
+          <div>
+            <form [formGroup]="imageForm" (ngSubmit)="addImages(imageForm.value)">
+                <section id="general" class="image-sections"> 
+                    <div class="row">
+                      <div class="col-md-12"> 
+                        <div *ngFor="let image of parent?.images"> 
+                          <img 
+                              *ngIf="image.displayPicture == false"
+                              src="{{image.value}}" 
+                              alt="{{image.filename}}"
+                              class="img-responsive img-style"
+                              data-toggle="modal" 
+                              [attr.data-target]="'#image' + image.id" > 
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                          <label class="btn btn-info" style="margin-top:9px;"for="images">Lägg till</label> 
+                          <input type="file" id="images" style="display:none;" multiple (change)="onFileChange($event)" #fileInput> 
+                          <button type="submit" class="btn btn-info">Ladda upp</button>
+                          <div *ngFor="let image of this.imagesToAdd">
+                              <img *ngIf="loadedImages" src="{{this.image.value}}" class="img-style"> 
+                          </div>
+                      </div>
+                    </div>
+                  </section>
+                </form> 
+          </div> 
+    </div>
+  
+   
+    </div>
+  </section>
+  
+  <!-- IMAGE MODAL -->
+  <div *ngFor="let image of parent.images">
+    <div class="modal fade modalPosition" id="image{{image.id}}" role="dialog">
+      <div class="modal-dialog"> 
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4>Bekräfta borttagning av Bild {{image.filename}}</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body"> 
+            <button type="button" class="btn btn-info" data-dismiss="modal">Behåll</button>
+            <button type="button" class="btn btn-secondary" (click)="removeImage(image.id)">Ta bort</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
- </div>
+
+</div>
+
+
+

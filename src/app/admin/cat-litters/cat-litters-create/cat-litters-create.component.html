@@ -40,12 +40,31 @@
     <section id="litter-images" class="sections">
       <div class="row">
           <div class="col-md-12"> 
+            <h4>Profilbild</h4>
+            <!-- <input type="file" id="images" class="btn btn-primary" (change)="onFileChange($event)" #fileInput multiple> -->
+            <label class="btn btn-info" style="margin-top:9px;"for="displayPicture">Lägg till</label>
+            <div *ngIf="loadedDisplayPicture"> 
+                <img src="{{this.displayPicture.value}}" class="img-style"> 
+            </div> 
+            <input type="file" id="displayPicture" style="display:none;"  (change)="onFileChangeDisplayPicture($event)" #fileInputDisplayPicture> 
+            <!-- <button type="submit" class="btn btn-info">Ladda upp</button> -->
+          </div> 
+        </div>
+    </section>
+
+    <section id="litter-images" class="sections">
+      <div class="row">
+          <div class="col-md-12"> 
             <h4>Bilder</h4>
             <!-- <input type="file" id="images" class="btn btn-primary" (change)="onFileChange($event)" #fileInput multiple> -->
             <label class="btn btn-info" style="margin-top:9px;"for="images">Lägg till</label>
-            <label *ngIf="loadedImages">{{this.imagesToAdd.length}} bilder</label>
+            <div *ngIf="loadedImages">
+              <div *ngFor="let image of this.imagesToAdd">
+                <img *ngIf="image.displayPicture == false" src="{{image.value}}" class="img-style">
+              </div>
+            </div> 
             <input type="file" id="images" style="display:none;" multiple (change)="onFileChange($event)" #fileInput> 
-            <button type="submit" class="btn btn-info">Ladda upp</button>
+            <!-- <button type="submit" class="btn btn-info">Ladda upp</button> -->
           </div> 
         </div>
     </section>

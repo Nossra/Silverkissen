@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Cat } from '../../../entities/cat';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CatService } from '../../../services/CatService';
@@ -21,8 +21,15 @@ export class CatParentsEditComponent implements OnInit {
   public pedigree:boolean;
   public chipped:boolean;
   public imagesToAdd: Array<Image> = [];
+  public displayPicture: Image;
   public loadedImages:boolean = false;
+  public loadedDisplayPicture:boolean = false;
   public imageForm: FormGroup;
+  public displayPictureImageForm: FormGroup;
+  public loading:boolean = true;
+  @ViewChild('fileInput') fileInput: ElementRef;
+  @ViewChild('fileInput') fileInputDisplayPicture: ElementRef;
+
   constructor(
     public activatedRoute:ActivatedRoute,
     public catService: CatService,
@@ -42,8 +49,12 @@ export class CatParentsEditComponent implements OnInit {
         'born' : null
       });
 
-      this.imageForm = this.formBuilder.group({
-        'images':null
+      this.imageForm = formBuilder.group({
+        'images' :null
+      });
+      
+      this.displayPictureImageForm = formBuilder.group({
+        'displaypicture' :null
       });
     } 
 
@@ -63,6 +74,27 @@ export class CatParentsEditComponent implements OnInit {
     })
   }
 
+  onFileChangeDisplayPicture(event) { 
+    this.loadedDisplayPicture = false;
+    if(event.target.files && event.target.files.length == 1) {
+      let files = event.target.files;
+      for (let i = 0; i < files.length; i++) {
+        let reader = new FileReader();
+        reader.readAsDataURL(files[i]);
+        reader.onload = () => {
+          let image:Image = {
+            filename: files[i].name,
+            filetype: files[i].type,
+            value: reader.result,
+            displayPicture: true
+          } 
+          this.displayPicture = image;
+          this.loadedDisplayPicture = true;
+        }
+      }
+    }
+  }
+
   onFileChange(event) {
     this.imagesToAdd = [];
     this.loadedImages = false;
@@ -75,34 +107,39 @@ export class CatParentsEditComponent implements OnInit {
           let image:Image = {
             filename: files[i].name,
             filetype: files[i].type,
-            value: reader.result
+            value: reader.result,
+            displayPicture: false
           } 
-          this.imagesToAdd.push(image);
-          this.loadedImages = true;
+          this.imagesToAdd.push(image); 
         }
       }
+      this.loadedImages = true;
     }
-  }
+  } 
 
   addImages(value:any) { 
-    console.log(this.imagesToAdd)
-    console.log(this.parentId)
-    for (var i = 0; i < this.imagesToAdd.length; i++) {
-      this.imageService.PostImageToExistingCat(this.imagesToAdd[i], this.parentId).subscribe(x=> {
-        window.location.reload();
+    if (this.loadedImages) {
+      for (var i = 0; i < this.imagesToAdd.length; i++) {
+        this.imageService.PostImageToExistingCat(this.imagesToAdd[i], this.parentId).subscribe(x=> {
+          this.router.navigate(['/admin',{outlets:{adminOutlet:'parents'}}])
+        });
+      }
+    } else if (this.loadedDisplayPicture) {
+      this.imageService.PostImageToExistingCat(this.displayPicture, this.parentId).subscribe(x=> {
+        this.router.navigate(['/admin',{outlets:{adminOutlet:'parents'}}])
       });
-    }
+    } 
   }
 
   removeImage(id:number) {
     this.imageService.DeleteCatImage(id).subscribe(x => {
-      window.location.reload();
+      this.router.navigate(['/admin',{outlets:{adminOutlet:'parents'}}])
     });
   }
 
   abort() {
     this.router.navigate(['/admin',{outlets:{adminOutlet:'parents'}}])
-  }
+  } 
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(x => {
@@ -114,7 +151,7 @@ export class CatParentsEditComponent implements OnInit {
       this.vaccinated = x["vaccinated"];
       this.chipped = x["chipped"];
       this.parent.formattedBirthDate = Helpers.dateHelper(new Date(x["birthDate"])); 
-      console.log(this.parent);
+      this.loading = false;
     });
     
   }

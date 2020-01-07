@@ -12,10 +12,15 @@ import { Image } from '../../../entities/image';
   styleUrls: ['./cat-parents-create.component.css']
 })
 export class CatParentsCreateComponent implements OnInit {
-
-  @ViewChild('fileInput') fileInput: ElementRef;
+ 
   public createForm: FormGroup;
-  public images: Array<Image> = [];
+  public imagesToAdd: Array<Image> = [];
+  public displayPicture: Image;
+  public loadedImages: boolean = false;
+  public loadedDisplayPicture:boolean = false;
+  @ViewChild('fileInput') fileInput: ElementRef;
+  @ViewChild('fileInput') fileInputDisplayPicture: ElementRef;
+
   constructor(public formBuilder: FormBuilder,
     public catService: CatService,
     public router: Router) { 
@@ -25,35 +30,63 @@ export class CatParentsCreateComponent implements OnInit {
         'color' : null,
         'name' : null,
         'notes' : null,
-        'chipped' : null,
-        'vaccinated' : null,
-        'pedigree' : null,
+        'chipped' : true,
+        'vaccinated' : true,
+        'pedigree' : true,
         'sex' : [null, [Validators.required], null]
       });
     }
 
-  onFileChange(event) {
-    this.images = [];
-    if(event.target.files && event.target.files.length > 0) {
-      let files = event.target.files;
-      for (let i = 0; i < files.length; i++) {
-        let reader = new FileReader();
-        reader.readAsDataURL(files[i]);
-        reader.onload = () => {
-          let image:any = {
-            filename: files[i].name,
-            filetype: files[i].type,
-            value: reader.result
-          } 
-          this.images.push(image);
+    onFileChangeDisplayPicture(event) {
+      this.displayPicture = new Image;
+      this.loadedDisplayPicture = false;
+      if(event.target.files && event.target.files.length > 0) {
+        let files = event.target.files;
+        for (let i = 0; i < files.length; i++) {
+          let reader = new FileReader();
+          reader.readAsDataURL(files[i]);
+          reader.onload = () => {
+            let image:Image = {
+              filename: files[i].name,
+              filetype: files[i].type,
+              value: reader.result,
+              displayPicture: true
+            } 
+            this.displayPicture = image;
+            this.loadedDisplayPicture = true;
+          }
         }
       }
     }
-  }
+   
+    onFileChange(event) {
+      this.imagesToAdd = [];
+      this.loadedImages = false;
+      if(event.target.files && event.target.files.length > 0) {
+        let files = event.target.files;
+        for (let i = 0; i < files.length; i++) {
+          let reader = new FileReader();
+          reader.readAsDataURL(files[i]);
+          reader.onload = () => {
+            let image:Image = {
+              filename: files[i].name,
+              filetype: files[i].type,
+              value: reader.result,
+              displayPicture: false
+            } 
+            this.imagesToAdd.push(image);
+            this.loadedImages = true;
+          }
+        }
+      }
+    }
 
   create(values: Cat) {
     values.parent = true;
-    values.Images = this.images; 
+    if (this.imagesToAdd.length > 0) {
+      values.images = this.imagesToAdd; 
+      values.images.push(this.displayPicture);
+    }
     this.catService.create(values).subscribe(x => {
       this.router.navigate(['/admin',{outlets:{adminOutlet:'parents'}}])
     });

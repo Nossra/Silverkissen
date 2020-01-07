@@ -28,7 +28,7 @@ export class CatLittersIndexComponent implements OnInit {
 
   delete(litter:Litter) {
     this.litterService.delete(litter).subscribe(x => {
-      window.location.reload();
+      this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
     });
   } 
 

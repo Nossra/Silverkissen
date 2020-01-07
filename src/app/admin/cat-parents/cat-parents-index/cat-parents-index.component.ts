@@ -10,6 +10,7 @@ import { CatService } from '../../../services/CatService';
 })
 export class CatParentsIndexComponent implements OnInit {
 
+  public loading:boolean = true;
   parents: Array<Cat>;
   constructor(
     public router:Router,
@@ -18,14 +19,14 @@ export class CatParentsIndexComponent implements OnInit {
 
   delete(parent: Cat) {
     this.catService.delete(parent).subscribe(x => {
-      window.location.reload();
+      this.router.navigate(['/admin',{outlets:{adminOutlet:'parents'}}])
     });
   }
 
   ngOnInit() {
     this.catService.getParents().subscribe(x => {
-      this.parents = x;
-      console.log(this.parents);
+      this.parents = x; 
+      this.loading = false;
     });
   }
 }

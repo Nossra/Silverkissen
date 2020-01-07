@@ -13,3 +13,7 @@
 .center-label {
     padding-top:10px;
 }
+
+.img-style {
+    width:21%; height:auto;max-width:205px; max-height:250px;float:left; margin-right:5px; margin-bottom:5px;
+}

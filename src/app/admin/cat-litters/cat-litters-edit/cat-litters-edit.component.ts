@@ -23,13 +23,17 @@ export class CatLittersEditComponent implements OnInit {
   public kittenForm: FormGroup;
   public parentsForm: FormGroup;
   public imageForm: FormGroup;
+  public displayPictureImageForm: FormGroup;
   public vaccinated: boolean;
   public chipped: boolean;
   public pedigree: boolean;
   public imagesToAdd: Array<Image> = [];
+  public displayPicture: Image;
   public loadedImages:boolean = false;
+  public loadedDisplayPicture:boolean = false;
   public loading:boolean = true;
   @ViewChild('fileInput') fileInput: ElementRef;
+  @ViewChild('fileInput') fileInputDisplayPicture: ElementRef;
 
   constructor(
     public litterService: LitterService,
@@ -66,7 +70,32 @@ export class CatLittersEditComponent implements OnInit {
       this.imageForm = formBuilder.group({
         'images' :null
       });
+      
+      this.displayPictureImageForm = formBuilder.group({
+        'displaypicture' :null
+      });
     } 
+
+    onFileChangeDisplayPicture(event) { 
+      this.loadedDisplayPicture = false;
+      if(event.target.files && event.target.files.length == 1) {
+        let files = event.target.files;
+        for (let i = 0; i < files.length; i++) {
+          let reader = new FileReader();
+          reader.readAsDataURL(files[i]);
+          reader.onload = () => {
+            let image:Image = {
+              filename: files[i].name,
+              filetype: files[i].type,
+              value: reader.result,
+              displayPicture: true
+            } 
+            this.displayPicture = image;
+            this.loadedDisplayPicture = true;
+          }
+        }
+      }
+    }
 
     onFileChange(event) {
       this.imagesToAdd = [];
@@ -80,12 +109,13 @@ export class CatLittersEditComponent implements OnInit {
             let image:Image = {
               filename: files[i].name,
               filetype: files[i].type,
-              value: reader.result
+              value: reader.result,
+              displayPicture: false
             } 
-            this.imagesToAdd.push(image);
-            this.loadedImages = true;
+            this.imagesToAdd.push(image); 
           }
         }
+        this.loadedImages = true;
       }
     }
 
@@ -121,16 +151,22 @@ export class CatLittersEditComponent implements OnInit {
   } 
 
   addImages(value:any) { 
-    for (var i = 0; i < this.imagesToAdd.length; i++) {
-      this.imageService.PostImageToExistingCatLitter(this.imagesToAdd[i], this.litter.id).subscribe(x=> {
-        window.location.reload();
+    if (this.loadedImages) {
+      for (var i = 0; i < this.imagesToAdd.length; i++) {
+        this.imageService.PostImageToExistingCatLitter(this.imagesToAdd[i], this.litter.id).subscribe(x=> {
+          this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
+        });
+      }
+    } else if (this.loadedDisplayPicture) {
+      this.imageService.PostImageToExistingCatLitter(this.displayPicture, this.litter.id).subscribe(x=> {
+        this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
       });
-    }
+    } 
   }
 
   removeImage(id:number) {
     this.imageService.DeleteLitterImage(id).subscribe(x => {
-      window.location.reload();
+      this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
     });
   }
 

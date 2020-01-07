@@ -23,9 +23,12 @@ export class CatLittersCreateComponent implements OnInit {
   public dads: Array<Cat> = [];
   public bogusLitterId:number = 1; //.Net ore EF finds the real id automatically in the api.
   public imagesToAdd: Array<Image> = [];
+  public displayPicture:Image;
   public loadedImages: boolean = false;
+  public loadedDisplayPicture:boolean = false;
   @ViewChild('fileInput') fileInput: ElementRef;
-  
+  @ViewChild('fileInput') fileInputDisplayPicture: ElementRef;
+
   constructor(
     public formBuilder: FormBuilder,
     public catService: CatService,
@@ -38,7 +41,11 @@ export class CatLittersCreateComponent implements OnInit {
       'dad' : [null, [Validators.required], null],
       'mom' : [null, [Validators.required], null],
       'born' : [null, [Validators.required], null],
-      'images' : null
+      'images' : null,
+      'displaypicture' : null,
+      'chipped' : true,
+      'vaccinated' : true,
+      'pedigree' : true
     });
   }
 
@@ -48,7 +55,13 @@ export class CatLittersCreateComponent implements OnInit {
     litter.amountOfKids = values.numberOfKittens;
     litter.notes = values.notes;
     litter.status = LitterStatus.ACTIVE
-    litter.images = this.imagesToAdd;
+    if (this.imagesToAdd.length > 0) {
+      litter.images = this.imagesToAdd;
+      litter.images.push(this.displayPicture);
+    } 
+    litter.chipped = values.chipped;
+    litter.pedigree = values.pedigree;
+    litter.vaccinated = values.vaccinated
     for (let parent of this.parents) {
       if (parent.id == values.dad || parent.id == values.mom) {
         litter.parents.push(
@@ -61,21 +74,35 @@ export class CatLittersCreateComponent implements OnInit {
     }
 
     litter.amountOfKids = values.numberOfKittens;
-    this.litterService.create(litter).subscribe(x => { 
-      // Secondary way of adding the images. Uses imageservice that posts to the latest litter that was added.
-      // if (this.images != undefined) {
-      //   for (let i = 0; i < this.images.length; i++) { 
-      //     this.imageService.PostImageToCatLitter(this.images[i]).subscribe(x => {
-      //       console.log(x);
-      //     })
-      //   }
-      // }
+    this.litterService.create(litter).subscribe(x => {  
       this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
     });
   }
 
   abort() {
     this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
+  }
+
+  onFileChangeDisplayPicture(event) {
+    this.displayPicture = new Image;
+    this.loadedDisplayPicture = false;
+    if(event.target.files && event.target.files.length > 0) {
+      let files = event.target.files;
+      for (let i = 0; i < files.length; i++) {
+        let reader = new FileReader();
+        reader.readAsDataURL(files[i]);
+        reader.onload = () => {
+          let image:Image = {
+            filename: files[i].name,
+            filetype: files[i].type,
+            value: reader.result,
+            displayPicture: true
+          } 
+          this.displayPicture = image;
+          this.loadedDisplayPicture = true;
+        }
+      }
+    }
   }
 
   
@@ -91,7 +118,8 @@ export class CatLittersCreateComponent implements OnInit {
           let image:Image = {
             filename: files[i].name,
             filetype: files[i].type,
-            value: reader.result
+            value: reader.result,
+            displayPicture: false
           } 
           this.imagesToAdd.push(image);
           this.loadedImages = true;
