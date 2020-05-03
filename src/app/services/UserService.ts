@@ -17,7 +17,7 @@ export class UserService {
     }
     private prodUrl: string = "https://silverkissen20191220122823.azurewebsites.net/"
     private testUrl:string = "https://localhost:44381/"
-    private url = this.prodUrl + "api/users";
+    private url = this.testUrl + "api/users";
     public get authenticated(): boolean {
         const token = this.jwtHelper.tokenGetter();   
         if (token) {    

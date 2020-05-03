@@ -7,32 +7,30 @@
     </div>
   </section>
 
-  <div class="loader" *ngIf="loading"></div> 
-  <div *ngIf="loading == false">
-    <section>
-      <div *ngFor="let parent of parents" class="col-sm-3 object">
-        <div id="edit" [routerLink]="['/admin', {outlets: {adminOutlet:['parents', parent.id]}}]"> 
-          <div class="row">
-            <div class="col-sm-6">
-              <h4>{{parent.name}}</h4>
-            </div>
-            <div class="col-sm-2 offset-4">  
-                <!-- <img src="../assets/images/edit.png" style="height:auto; width:10px; ;cursor:pointer;" [routerLink]="['/admin', {outlets: {adminOutlet:['parents', parent.id]}}]"> -->
-                <img src="../assets/images/delete.png" style="height:auto; width:10px;cursor:pointer;" data-toggle="modal"  [attr.data-target]="'#parent' + parent.id"> 
-              </div>
-          </div>
-          <div class="row" *ngIf="parent.images.length > 0">
-            <div class="col-sm-10">
-              <img src="{{parent?.images[0].value}}" alt="katt" style="width:100%; height:auto;" class="img-responsive">
-            </div>
-          </div>
-          <div class="row" style="margin-top:10px; margin-right:10px;">
-            
+<div class="loader" *ngIf="loading"></div> 
+<div *ngIf="loading == false">
+  <section>
+    <div *ngFor="let parent of parents" class="col-sm-3 object"> 
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="edit" [routerLink]="['/admin', {outlets: {adminOutlet:['parents', parent.id]}}]">
+            <h4>{{parent.name}}</h4>
           </div>
         </div>
+        <div class="col-sm-2 offset-4">  
+            <img src="../assets/images/delete.png" style="height:auto; width:10px;cursor:pointer;" data-toggle="modal"  [attr.data-target]="'#parent' + parent.id"> 
+          </div>
       </div>
-    </section>
-  </div>
+      <div class="edit" [routerLink]="['/admin', {outlets: {adminOutlet:['parents', parent.id]}}]"> 
+        <div class="row" *ngIf="parent.images.length > 0">
+          <div class="col-sm-10">
+            <img src="{{parent?.images[0].value}}" alt="katt" style="width:100%; height:auto;" class="img-responsive">
+          </div>
+        </div> 
+      </div>
+    </div>
+  </section>
+</div>
  
 
 

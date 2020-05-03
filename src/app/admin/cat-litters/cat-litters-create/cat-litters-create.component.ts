@@ -55,7 +55,7 @@ export class CatLittersCreateComponent implements OnInit {
     litter.amountOfKids = values.numberOfKittens;
     litter.notes = values.notes;
     litter.status = LitterStatus.ACTIVE
-    if (this.imagesToAdd.length > 0) {
+    if (this.imagesToAdd.length > 0 && this.loadedDisplayPicture) {
       litter.images = this.imagesToAdd;
       litter.images.push(this.displayPicture);
     } 

@@ -163,7 +163,7 @@ export class CatLittersEditComponent implements OnInit {
       });
     } 
   }
-
+  // [routerLink]="['/admin', {outlets: {adminOutlet:['litters', litter.id]}}] för nuvarande kull. problemet är att refresen gör typ inget. 
   removeImage(id:number) {
     this.imageService.DeleteLitterImage(id).subscribe(x => {
       this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])

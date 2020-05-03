@@ -45,10 +45,7 @@ export class CatLittersIndexComponent implements OnInit {
         // });
       }  
     });
-  } 
-
-
-  
+  }  
   customize() { 
     this.showCards = !this.showCards;
   }
