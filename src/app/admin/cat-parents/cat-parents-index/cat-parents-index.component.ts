@@ -18,12 +18,17 @@ export class CatParentsIndexComponent implements OnInit {
   ) { }
 
   delete(parent: Cat) {
-    this.catService.delete(parent).subscribe(x => {
-      this.router.navigate(['/admin',{outlets:{adminOutlet:'parents'}}])
+    this.catService.delete(parent).subscribe(x => { 
+      this.loading = true;
+      this.getData();
     });
   }
 
   ngOnInit() {
+    this.getData();
+  }
+
+  getData() {
     this.catService.getParents().subscribe(x => {
       this.parents = x; 
       this.loading = false;

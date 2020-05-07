@@ -9,7 +9,7 @@ import { Litter } from "../entities/litter";
 export class LitterService {
     private prodUrl: string = "https://silverkissen20191220122823.azurewebsites.net/"
     private testUrl:string = "https://localhost:44381/";
-    private url:string = this.testUrl + "api/catlitters/";
+    private url:string = this.prodUrl + "api/catlitters/";
     private activeLittersUrl:string = this.url + "active";
     private archivedLittersUrl:string = this.url + "archived";
     private earlierLittersUrl:string = this.url + "earlier"; 

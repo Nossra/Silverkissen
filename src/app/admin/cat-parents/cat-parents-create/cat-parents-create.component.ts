@@ -83,8 +83,10 @@ export class CatParentsCreateComponent implements OnInit {
 
   create(values: Cat) {
     values.parent = true;
-    if (this.imagesToAdd.length > 0 && this.loadedDisplayPicture) {
+    if (this.imagesToAdd.length > 0) {
       values.images = this.imagesToAdd; 
+    }
+    if (this.loadedDisplayPicture) {
       values.images.push(this.displayPicture);
     }
     this.catService.create(values).subscribe(x => {

@@ -28,24 +28,25 @@ export class CatLittersIndexComponent implements OnInit {
 
   delete(litter:Litter) {
     this.litterService.delete(litter).subscribe(x => {
-      this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
+      this.loading = true;
+      this.getLitters();
     });
   } 
 
   ngOnInit() {
+    this.getLitters();
+  }  
+
+  getLitters() {
     this.litterService.getAll().subscribe(x => { 
       this.litters = x;  
       for (let litter of this.litters) {
         litter.formattedBirthDate = Helpers.dateHelper(new Date(litter.birthDate));
-        litter.statusText = Helpers.statusHelper(litter.status);  
-        this.loading = false;
-        // this.imageService.GetCatLitterImages(litter.id).subscribe(x => { 
-        //   litter.images = x;  
-        //   this.loading = false;
-        // });
+        litter.statusText = Helpers.statusHelper(litter.status);   
       }  
+      this.loading = false; 
     });
-  }  
+  }
   customize() { 
     this.showCards = !this.showCards;
   }

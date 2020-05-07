@@ -8,7 +8,7 @@ import { Helpers } from "../Helpers/helper";
 export class CatService {
     private testUrl:string = "https://localhost:44381/";
     private prodUrl: string = "https://silverkissen20191220122823.azurewebsites.net/" 
-    private url = this.testUrl + "api/cats/";
+    private url = this.prodUrl + "api/cats/";
     
     constructor(private http: HttpClient) {
         

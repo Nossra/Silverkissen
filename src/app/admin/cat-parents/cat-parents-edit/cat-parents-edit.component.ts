@@ -70,7 +70,7 @@ export class CatParentsEditComponent implements OnInit {
     if (cat.chipped != null) this.parent.chipped = cat.chipped;
  
     this.catService.putUpdate(this.parent).subscribe(x => {
-      this.router.navigate(['/admin',{outlets:{adminOutlet:'parents'}}])
+      this.getData();
     })
   }
 
@@ -121,19 +121,23 @@ export class CatParentsEditComponent implements OnInit {
     if (this.loadedImages) {
       for (var i = 0; i < this.imagesToAdd.length; i++) {
         this.imageService.PostImageToExistingCat(this.imagesToAdd[i], this.parentId).subscribe(x=> {
-          this.router.navigate(['/admin',{outlets:{adminOutlet:'parents'}}])
+          this.imagesToAdd = [];
+          this.loadedImages = false;
+          this.getData();
         });
       }
     } else if (this.loadedDisplayPicture) {
       this.imageService.PostImageToExistingCat(this.displayPicture, this.parentId).subscribe(x=> {
-        this.router.navigate(['/admin',{outlets:{adminOutlet:'parents'}}])
+        this.displayPicture = null;
+        this.loadedDisplayPicture = false; 
+        this.getData();
       });
     } 
   }
 
   removeImage(id:number) {
     this.imageService.DeleteCatImage(id).subscribe(x => {
-      this.router.navigate(['/admin',{outlets:{adminOutlet:'parents'}}])
+      this.getData();
     });
   }
 
@@ -142,6 +146,10 @@ export class CatParentsEditComponent implements OnInit {
   } 
 
   ngOnInit() {
+    this.getData();
+  }
+
+  getData() {
     this.activatedRoute.params.subscribe(x => {
       this.parentId = x['id'];
     });
@@ -153,7 +161,6 @@ export class CatParentsEditComponent implements OnInit {
       this.parent.formattedBirthDate = Helpers.dateHelper(new Date(x["birthDate"])); 
       this.loading = false;
     });
-    
   }
 
 }

@@ -129,7 +129,7 @@ export class CatLittersEditComponent implements OnInit {
       if (litter.readyDate != null) this.litter.readyDate = litter.readyDate;
       if (litter.birthDate != null) this.litter.birthDate = litter.birthDate; 
     this.litterService.putUpdate(this.litter).subscribe(x => {
-      this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])  
+      this.getData();
     });
   }
 
@@ -146,7 +146,7 @@ export class CatLittersEditComponent implements OnInit {
       }
      }); 
     this.catService.putUpdate(catToUpdate).subscribe(x => {
-      window.location.reload();
+      this.getData();
     })
   } 
 
@@ -154,19 +154,23 @@ export class CatLittersEditComponent implements OnInit {
     if (this.loadedImages) {
       for (var i = 0; i < this.imagesToAdd.length; i++) {
         this.imageService.PostImageToExistingCatLitter(this.imagesToAdd[i], this.litter.id).subscribe(x=> {
-          this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
+          this.imagesToAdd = [];
+          this.loadedImages = false;
+          this.getData();
         });
       }
     } else if (this.loadedDisplayPicture) {
       this.imageService.PostImageToExistingCatLitter(this.displayPicture, this.litter.id).subscribe(x=> {
-        this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
+        this.displayPicture = null;
+        this.loadedDisplayPicture = false;
+        this.getData();
       });
     } 
-  }
-  // [routerLink]="['/admin', {outlets: {adminOutlet:['litters', litter.id]}}] för nuvarande kull. problemet är att refresen gör typ inget. 
+  } 
+
   removeImage(id:number) {
     this.imageService.DeleteLitterImage(id).subscribe(x => {
-      this.router.navigate(['/admin',{outlets:{adminOutlet:'litters'}}])
+      this.getData();
     });
   }
 
@@ -175,6 +179,10 @@ export class CatLittersEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getData();
+  } 
+
+  getData() {
     this.activatedRouter.params.subscribe(x => {
       this.litterID = x["id"];
     });
@@ -188,5 +196,5 @@ export class CatLittersEditComponent implements OnInit {
       this.litter.formattedBirthDate = Helpers.dateHelper(new Date(x["birthDate"]));
       this.loading = false;
     })
-  } 
+  }
 }
