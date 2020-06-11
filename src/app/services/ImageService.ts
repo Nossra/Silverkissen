@@ -8,7 +8,7 @@ export class ImageService {
     private testUrl:string = "https://localhost:44381/";
     private prodUrl: string = "https://silverkissen20191220122823.azurewebsites.net/"
 
-    private url = this.prodUrl + "api/images/";
+    private url = this.testUrl + "api/images/";
     constructor(private http: HttpClient) {
         
     }

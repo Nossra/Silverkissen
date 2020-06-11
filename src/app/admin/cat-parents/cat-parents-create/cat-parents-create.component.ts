@@ -33,7 +33,9 @@ export class CatParentsCreateComponent implements OnInit {
         'chipped' : true,
         'vaccinated' : true,
         'pedigree' : true,
-        'sex' : [null, [Validators.required], null]
+        'sex' : [null, [Validators.required], null],
+        'images' : null,
+        'displaypicture' : null
       });
     }
 
@@ -51,8 +53,8 @@ export class CatParentsCreateComponent implements OnInit {
               filetype: files[i].type,
               value: reader.result,
               displayPicture: true
-            } 
-            this.displayPicture = image;
+            }  
+            this.displayPicture = image; 
             this.loadedDisplayPicture = true;
           }
         }
@@ -82,11 +84,12 @@ export class CatParentsCreateComponent implements OnInit {
     }
 
   create(values: Cat) {
-    values.parent = true;
+    values.parent = true; 
+    values.images = [];
     if (this.imagesToAdd.length > 0) {
       values.images = this.imagesToAdd; 
     }
-    if (this.loadedDisplayPicture) {
+    if (this.loadedDisplayPicture) { 
       values.images.push(this.displayPicture);
     }
     this.catService.create(values).subscribe(x => {
